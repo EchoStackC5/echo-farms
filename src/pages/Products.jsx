@@ -1,0 +1,10 @@
+// import {  Flex, Text, Button } from "@radix-ui/themes"
+import ProductNavBar from "@/components/ProductNavbar"
+export default function Products(){
+    return(
+        <div>
+            <ProductNavBar/>
+            <p className=" text-shadow-indigo-300 font-extrabold text-9xl">This is Login</p>
+        </div>
+    )
+}
