@@ -13,9 +13,9 @@ export default function Home() {
             <DashboardProductCards />
             <p className="font-lato md:text-2xl py-15">🔥Hot in the market place</p>
             <div className="flex md:gap-7">
-                <div className="md:h[706px] md:w-[500px] bg-white flex flex-col md:px-10">
+                <div className="md:h[706px] md:w-[500px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
                     <div></div>
-                    <div className="md:py-5 md:space-y-3 rounded">
+                    <div className="md:py-5 md:space-y-3">
                         <h1>Massey Fergoson 385 4WD 2022 Model</h1>
                         <button className="font-lato md:h-8 md:w-30 rounded-full bg-[#32BB781A] text-sm">Farm Machinery</button>
                         <p>Durable and fuel efficient tractor ideal for large-scale farming. Comes with power steering, diesel engine and low-hour usage</p>
@@ -26,7 +26,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="md:w-[500px] bg-white flex flex-col md:px-10">
+                <div className="md:w-[500px] bg-white border-light-border flex flex-col md:px-10">
                     <div></div>
                     <div className="md:py-5 md:space-y-3 rounded">
                         <h1>300W Solar Panel Kit for Irrigations & Lighting</h1>
