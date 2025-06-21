@@ -7,6 +7,7 @@ import ManageAds from "./pages/dashboard/ManageAds";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Products from "./pages/Products";
+import Trials from "./pages/trials";
 
 const echoFarmsRoutes = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const echoFarmsRoutes = createBrowserRouter([
   {
     path: "/Products",
     element: <Products/>
+  },
+  {
+    path: "/trials",
+    element: <Trials/>
   },
   // {
   //   path: "*",
