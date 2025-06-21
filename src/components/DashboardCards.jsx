@@ -5,15 +5,15 @@ export default function DashboardCards() {
         <section className="flex justify-between">
             <div className="space-y-6">
                 <div className="font-font-satoshi">
-                    <h1 className=" text-xl md:text-2xl font-bold text-darkestHeading ">Good morning, <span className="text-green-500">Abigail!</span>😊</h1>
-                    <p className="text-muted-foreground text-sm">Manage all activities here here!</p>
+                    <h1 className=" text-xl md:text-2xl font-lato text-darkestHeading ">Good morning, <span className="text-[#32BB78] font-lato">Abigail!</span>😊</h1>
+                    <p className="text-muted-foreground text-sm font-lato">Manage all activities here here!</p>
                 </div>
             </div>
 
-            <div className="flex">
-                <h1>Verified Vendor</h1>
-                <div className="h-[65px] w-[65px] rounded-full bg-[#32BB781A]">
-                    <img src={correct1} alt="" className="h-[65px] w-[65px]" />
+            <div className="flex items-center">
+                <h1 className="font-lato md:text-2xl">Verified Vendor</h1>
+                <div className="h-[60px] w-[60px] rounded-full bg-[#32BB781A] flex items-center justify-around">
+                    <img src={correct1} alt="" className="h-[45px] w-[50px]" />
                 </div>
             </div>
         </section>
