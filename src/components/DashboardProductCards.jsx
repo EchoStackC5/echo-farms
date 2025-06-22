@@ -38,7 +38,7 @@ export default function DashboardProductCards() {
 
             <div className="bg-darkest-heading md:p-4 rounded-lg md:space-y-4 md:w-[350px]">
                 {/* Active Ads Card */}
-                <div className="flex bg-gradient-to-r from-[#386B52] shadow:md to bg-[#3C996C]  md:h-20 md:w-full justify-between items-center px-4 rounded-md shadow">
+                <div className="flex bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C]  md:h-20 md:w-full justify-between items-center px-4 rounded-md shadow">
                     <div className="flex flex-col text-left">
                         <h1 className="md:text-xl font-bold text-gray-300 font-lato">50+</h1>
                         <p className="text-sm text-gray-300 font-lato">Active Ads</p>

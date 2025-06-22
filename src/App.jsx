@@ -24,7 +24,7 @@ const echoFarmsRoutes = createBrowserRouter([
   },
 
   {
-    path: "/Products",
+    path: "/products",
     element: <Products/>
   },
   {
