@@ -28,7 +28,7 @@ export default function Trials() {
 
                 {/* Right Form Section */}
                 <div className="w-full max-w- lg:max-w-lg">
-                    <form className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl shadow-xl p-6 text-white">
+                    <form className="backdrop-blur-md bg-white/10 border border-white/30 rounded-xl shadow-xl p-6 text-white">
                         <h3 className="text-2xl lg:text-3xl font-bold mb-2">Create an Account</h3>
                         <p className="mb-4 text-sm lg:text-base">Join the Leading Marketplace for Agricultural Products</p>
 

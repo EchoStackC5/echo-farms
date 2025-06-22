@@ -7,6 +7,7 @@ import ManageAds from "./pages/dashboard/ManageAds";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Products from "./pages/Products";
+import ProductDetails from "./pages/ProductDetails"
 import Trials from "./pages/trials";
 
 const echoFarmsRoutes = createBrowserRouter([
@@ -16,25 +17,32 @@ const echoFarmsRoutes = createBrowserRouter([
   },
   {
     path: "/login",
-    element:<Login/>
+    element: <Login />
   },
   {
     path: "/sign-up",
-    element: <SignUp/>
+    element: <SignUp />
   },
 
   {
-    path: "/Products",
-    element: <Products/>
+    path: "/products",
+    element: <Products />
+  },
+
+  {
+    path: "product-details",
+    element: <ProductDetails />
   },
   {
     path: "/trials",
-    element: <Trials/>
+    element: <Trials />
   },
+
   // {
   //   path: "*",
   //   element: <NotFound/>
   // },
+
   {
     path: "/dashboard",
     element: <RootLayout />,
@@ -43,10 +51,11 @@ const echoFarmsRoutes = createBrowserRouter([
         index: true,
         element: <Dashboard />
       },
-        {
-          path: 'manage-ads',
-          element:<ManageAds/>
-        },
+
+      {
+        path: 'manage-ads',
+        element: <ManageAds />
+      },
       //   {
       //     path: 'genres',
       //     element:<GenresPage/>
@@ -59,9 +68,9 @@ const echoFarmsRoutes = createBrowserRouter([
 export default function App() {
   return (
     <>
-  
-        <RouterProvider router={echoFarmsRoutes} />
-     
+
+      <RouterProvider router={echoFarmsRoutes} />
+
 
     </>
   )
