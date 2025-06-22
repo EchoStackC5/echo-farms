@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react"
 
 export default function HeroSearchFilter() {
     return (
-        <div className="mx-auto flex justify-center items-center mt-33">
+        <div className="mx-auto flex justify-center items-center mt-14 mb-20">
             <form className="relative w-full max-w-3xl">
                 <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white w-5 h-5" />
                 <input
