@@ -5,36 +5,42 @@ import fertilizer from "../../assets/fertilizer.png"
 import pesticides from "../../assets/pesticides.png"
 import seeds from "../../assets/seeds.png"
 import tractor1 from "../../assets/tractor1.png"
+import cartapillar from "../../assets/images/cartapillar.png"
+import solar from "../../assets/images/solar.png"
 
 export default function Home() {
     return (
         <section className="flex flex-col">
             <DashboardCards />
             <DashboardProductCards />
-            <p className="font-lato md:text-2xl py-15">🔥Hot in the market place</p>
+            <p className="font-lato md:text-3xl font-bold py-15">🔥Hot in the market place</p>
             <div className="flex md:gap-7">
                 <div className="md:h[706px] md:w-[500px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
-                    <div></div>
+                    <div className="py-3">
+                        <img src={cartapillar} alt="" />
+                    </div>
                     <div className="md:py-5 md:space-y-3">
-                        <h1>Massey Fergoson 385 4WD 2022 Model</h1>
+                        <h1 className="font-lato text-2xl">Massey Fergoson 385 4WD 2022 Model</h1>
                         <button className="font-lato md:h-8 md:w-30 rounded-full bg-[#32BB781A] text-sm">Farm Machinery</button>
-                        <p>Durable and fuel efficient tractor ideal for large-scale farming. Comes with power steering, diesel engine and low-hour usage</p>
+                        <p className="font-lato text-lg">Durable and fuel efficient tractor ideal for large-scale farming. Comes with power steering, diesel engine and low-hour usage</p>
                         <div className="flex justify-between items-center">
                             <h1>GHC 70,000</h1>
-                            <button className="font-lato md:h-10 md:w-40 bg-yellow-button rounded-full">Post similar ads</button>
+                            <button className="font-lato md:h-10 md:w-40 bg-yellow-button rounded-full font-bold">Post similar ads</button>
                         </div>
                     </div>
                 </div>
 
-                <div className="md:w-[500px] bg-white border-light-border flex flex-col md:px-10">
-                    <div></div>
-                    <div className="md:py-5 md:space-y-3 rounded">
-                        <h1>300W Solar Panel Kit for Irrigations & Lighting</h1>
+                <div className="md:w-[500px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
+                    <div className="py-3">
+                        <img src={solar} alt="" />
+                    </div>
+                    <div className="md:py-5 md:space-y-3">
+                        <h1 className="font-lato text-2xl ">300W Solar Panel Kit for Irrigations & Lighting</h1>
                         <button className="font-lato md:h-8 md:w-30 rounded-full bg-[#32BB781A] text-sm">Solar Energy</button>
-                        <p>High-efficiency solar panel kit suitable for farm lighting, irrigation systems, and off-grid power needs </p>
+                        <p className="font-lato text-lg">High-efficiency solar panel kit suitable for farm lighting, irrigation systems, and off-grid power needs </p>
                         <div className="flex justify-between items-center">
                             <h1>GHC 3,000</h1>
-                            <button className="font-lato md:h-10 md:w-40 bg-yellow-button rounded-full">Post similar ads</button>
+                            <button className="font-lato md:h-10 md:w-40 bg-yellow-button rounded-full font-bold">Post similar ads</button>
                         </div>
                     </div>
                 </div>
