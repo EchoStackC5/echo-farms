@@ -2,8 +2,8 @@
 import eye from "../assets/images/eye.png";
 import google from "../assets/images/google.webp";
 import apple from "../assets/images/apple.png";
-import img1 from "../assets/images/signup.png";
-import logo from "../assets/signUp-logo.svg";
+import img1 from "../assets/images/newimage1.png";
+import logo from "../assets/images/newlogo.png";
 import { useState } from "react";
 
 export default function SignUp() {
@@ -15,9 +15,9 @@ export default function SignUp() {
 
 
     return (
-        <div className="h-screen overflow-x-hidden bg-[url('./assets/images/signup.png')] bg-center bg-cover">
+        <div className="h-screen overflow-x-hidden bg-[url('./assets/images/newimage1.png')] bg-center bg-cover">
             {/* Logo */}
-            <div className="relative z-10 px-4 pt-4">
+            <div className="relative z-10 px-4 pt-4 mb-4 md:mb-0">
                 <img src={logo} alt="Logo" className="w-32 md:w-40" />
             </div>
 
@@ -38,7 +38,7 @@ export default function SignUp() {
                 </div>
 
                 {/* Right Form Section */}
-                <form className="w-full max-w-[500px] md:mt-5 backdrop-blur-md bg-white/20 border border-white/30 rounded-xl shadow-xl p-6 text-white">
+                <form className="w-full max-w-[450px] md:mt-5 backdrop-blur-md bg-darkest-heading  border-white/30 rounded-xl shadow-xl p-6 text-white">
                     <h3 className="text-3xl font-normal mb-2">Create an Account</h3>
                     <p className="mb-4">Join the Leading Marketplace for Agricultural Products</p>
 
@@ -124,7 +124,7 @@ export default function SignUp() {
                             <img src={google} alt="" className="h-5 w-5 mr-2" />
                             Google
                         </button>
-                        <button className="flex items-center justify-center bg-darkest-heading text-white py-2 rounded-full w-full sm:w-[48%] hover:bg-[#32BB78]">
+                        <button className="flex items-center justify-center bg-[#0066CC] text-white py-2 rounded-full w-full sm:w-[48%] hover:bg-[#32BB78]">
                             <img src={apple} alt="" className="h-4 w-4 mr-2" />
                             Apple
                         </button>

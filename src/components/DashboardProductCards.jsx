@@ -6,23 +6,23 @@ export default function DashboardProductCards() {
         <section className="flex justify-between md:mt-10">
             <div className="bg-darkest-heading md:p-4 rounded-lg md:space-y-4 w-[350px]">
                 {/* Basic Ads Card */}
-                <div className="flex bg-white h-20 w-full justify-between items-center md:px-4 rounded-md shadow">
+                <div className="flex group bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C] h-20 w-full justify-between items-center md:px-4 rounded-md shadow transition-colors duration-300">
                     <div className="flex flex-col text-left">
-                        <h1 className="text-xl font-bold text-green-900 font-lato">5+</h1>
-                        <p className="text-sm text-gray-700 font-lato">Basic Ads</p>
+                        <h1 className="text-xl font-bold text-green-900 font-lato group-hover:text-white transition-colors duration-300">5+</h1>
+                        <p className="text-sm text-secondary-text font-lato group-hover:text-dark-border transition-colors duration-300">Basic Ads</p>
                     </div>
-                    <div className="text-green-500">
+                    <div className="text-green-500 animate-bounce group-hover:text-dark-border transition-colors duration-300">
                         <ChartNoAxesColumn />
                     </div>
                 </div>
 
                 {/* Enterprise Ads Card */}
-                <div className="flex bg-white md:h-20 md:w-full justify-between items-center md:px-4 rounded-md shadow">
+                <div className="flex group bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C] md:h-20 md:w-full justify-between items-center md:px-4 rounded-md shadow transition-colors duration-300">
                     <div className="flex flex-col text-left">
-                        <h1 className="text-xl font-bold text-green-900 font-lato">10</h1>
-                        <p className="text-sm text-gray-700 font-lato">Entreprise Ads</p>
+                        <h1 className="text-xl font-bold text-darkest-heading font-lato group-hover:text-white transition-colors duration-300">10</h1>
+                        <p className="text-sm text-secondary-text font-lato group-hover:text-dark-border transition-colors duration-300">Entreprise Ads</p>
                     </div>
-                    <div className="text-green-500">
+                    <div className="text-green-500 animate-bounce group-hover:text-white transition-colors duration-300">
                         <ChartNoAxesColumn />
                     </div>
                 </div>
@@ -38,23 +38,23 @@ export default function DashboardProductCards() {
 
             <div className="bg-darkest-heading md:p-4 rounded-lg md:space-y-4 md:w-[350px]">
                 {/* Active Ads Card */}
-                <div className="flex bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C]  md:h-20 md:w-full justify-between items-center px-4 rounded-md shadow">
+                <div className="flex group bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C]  md:h-20 md:w-full justify-between items-center px-4 rounded-md shadow transition-colors duration-300">
                     <div className="flex flex-col text-left">
-                        <h1 className="md:text-xl font-bold text-gray-300 font-lato">50+</h1>
-                        <p className="text-sm text-gray-300 font-lato">Active Ads</p>
+                        <h1 className="md:text-xl font-bold text-darkest-heading font-lato group-hover:text-white transition-colors duration-300">50+</h1>
+                        <p className="text-sm text-secondary-text font-lato group-hover:text-dark-border transition-colors duration-300">Active Ads</p>
                     </div>
-                    <div className="text-gray-400">
+                    <div className="text-green-500 animate-bounce group-hover:text-white transition-colors duration-300">
                         <ChartNoAxesColumn />
                     </div>
                 </div>
 
                 {/* Total Ads Card */}
-                <div className="flex bg-white md:h-20 md:w-full justify-between items-center md:px-4 rounded-md shadow">
+                <div className="flex group bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C] md:h-20 md:w-full justify-between items-center md:px-4 rounded-md shadow transition-colors duration-300">
                     <div className="flex flex-col text-left">
-                        <h1 className="text-xl font-bold text-green-900 font-lato">45</h1>
-                        <p className="text-sm text-gray-700 font-lato">Total Ads</p>
+                        <h1 className="text-xl font-bold text-darkest-heading font-lato group-hover:text-white transition-colors duration-300">45</h1>
+                        <p className="text-sm text-secondary-text font-lato group-hover:text-dark-border transition-colors duration-300">Total Ads</p>
                     </div>
-                    <div className="text-green-500">
+                    <div className="text-green-500 animate-bounce group-hover:text-white transition-colors duration-300">
                         <ChartNoAxesColumn />
                     </div>
                 </div>

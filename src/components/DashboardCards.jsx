@@ -5,8 +5,8 @@ export default function DashboardCards() {
         <section className="flex justify-between">
             <div className="space-y-6">
                 <div className="font-font-satoshi">
-                    <h1 className=" text-xl md:text-2xl font-lato text-darkestHeading ">Good morning, <span className="text-[#32BB78] font-lato">Abigail!</span>😊</h1>
-                    <p className="text-muted-foreground text-sm font-lato">Manage all activities here here!</p>
+                    <h1 className=" text-xl md:text-3xl font-lato text-darkestHeading ">Good morning, <span className="text-[#32BB78] font-lato">Abigail!</span>😊</h1>
+                    <p className="text-muted-foreground text-lg font-lato">Manage all activities here here!</p>
                 </div>
             </div>
 
