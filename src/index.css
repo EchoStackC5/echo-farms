@@ -1,20 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:wght@100..900&family=Poppins:wght@100..900&family=Roboto:wght@100..900&display=swap');
 @import "tailwindcss";
 @import "@radix-ui/themes/styles.css";
 @import "tw-animate-css";
+
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   /* Colors */
-  --color-navy-blue: #10107B;
-  --color-primary: #7848F4;
+  --color-primary-color: #32BB78;
+  --color-darkest-heading: #143324;
+  --color-secondary-text: #507362;
+  --color-dark-border: #87A898;
+  --color-light-border: #DAF2E6;
+  --color-backgrounds: #F5FAF8;
+  --color-primary: #32BB78;
+  --color-yellow-button: #B2BB32;
+  --color-green-buuton:#2B8659;
+
   /* Typography */
-  --text-big-heading: 36px;
-  --text-heading: 24px;
-  --text-sub-heading: 18px;
-  --text-body-text: 16px;
-  --text-paragraph: 12px;
-  --text-label: 10px;
+   --font-roboto: 'Roboto', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-poppins: 'Poppins', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   --font-lato: 'Lato', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   --font-lato: 'Lato', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
 }
 
 @theme inline {

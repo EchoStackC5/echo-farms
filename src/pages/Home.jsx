@@ -1,12 +1,16 @@
-import {  Flex, Text, Button } from "@radix-ui/themes"
-export default function Home(){
-    return(
-        <div>
-            <p className="bg-amber-950 text-shadow-indigo-300 font-extrabold text-9xl">This is Home</p>
-            <Flex direction="column" gap="2">
-			<Text>Hello from Radix Themes :)</Text>
-			<Button>Let's go</Button>
-		</Flex>
+
+import HomeNav from "@/components/HomeNav"
+import HeroSection from "@/components/HeroSection"
+import AboutUs from "@/components/AboutUs"
+export default function Home() {
+    return (
+        <div className="bg-darkest-heading w-full h-full">
+            <HomeNav />
+            <HeroSection />
+            <div className="min-h-screen bg-[url('./assets/argriculturCover.jpg')] bg-center bg-cover relative">
+            </div>
+            <AboutUs />
+
         </div>
     )
 }
