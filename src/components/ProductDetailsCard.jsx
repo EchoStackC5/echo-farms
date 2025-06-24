@@ -9,10 +9,10 @@ export default function ProductDetailsCard() {
     return (
         <section className="bg-[#F5FAF8] min-h-screen px-4 py-8">
             <Navbar />
-            <div className="flex flex-col md:flex-row md:space-x-12">
-                <div className="relative bg-[#143324] h-[602px] w-full md:w-[697px] flex ml-0 md:ml-6 items-center mt-6">
-                    <img src={shadow} alt="" className="absolute mt-65 md:mt-90 w-[90%] md:w-[670px] " />
-                    <img src={img1} alt="" className="w-[300px] md:ml-30 md:w-[445px] h-[472px] relative animate-bounce-slight" />
+            <div className="flex flex-col md:mt-30 md:flex-row md:space-x-20">
+                <div className="relative bg-[#143324] h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl">
+                    <img src={shadow} alt="" className="absolute mt-59 md:mt-90 w-[90%] md:w-[670px] " />
+                    <img src={img1} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight" />
                 </div>
                 <style>
                     {`
@@ -85,14 +85,14 @@ export default function ProductDetailsCard() {
             </div>
 
             {/* Thumbnail images grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full md:w-[600px] gap-6 md:gap-21 ml-0 md:ml-6 mt-10">
-                <div className="bg-white border-[#DAF2E6] h-[192px] w-full md:w-[204px] flex items-center pl-10 border-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full md:w-[150px] gap-6 md:gap-50 ml-0 md:ml-6 mt-10">
+                <div className="bg-white border-[#DAF2E6] h-[170px] w-full md:w-[150px] flex items-center pl-1 border-1">
                     <img src={img1} alt="" className="h-[137px] w-[129px]" />
                 </div>
-                <div className="bg-white border-[#DAF2E6] h-[192px] w-full md:w-[204px] flex items-center pl-10 border-1">
+                <div className="bg-white border-[#DAF2E6] h-[170px] w-full md:w-[150px] flex items-center pl-1 border-1">
                     <img src={img2} alt="" className="h-[137px] w-[129px]" />
                 </div>
-                <div className="bg-white border-[#DAF2E6] h-[192px] w-full md:w-[204px] flex items-center pl-10 border-1">
+                <div className="bg-white border-[#DAF2E6] h-[170px] w-full md:w-[150px] flex items-center pl-1 border-1">
                     <img src={img3} alt="" className="h-[137px] w-[129px]" />
                 </div>
             </div>

@@ -1,5 +1,6 @@
 "use client"
-
+import { useState } from "react"
+import fertilizer from "../assets/fertilizer.png"
 import * as React from "react"
 import {
   flexRender,
@@ -37,89 +38,97 @@ const data = [
     id: "m5gr84i9",
     adTitle: "Tractor",
     category: "Farm Machinery",
-    price: "GHC 3,000",
+    price: "GHC 60,000",
     adStatus: "Published",
     adType: "Basic"
   },
   {
     id: "3u1reuv4",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Basic"
+    adTitle: "Seeds",
+    category: "Agro",
+    price: "GHC 4,000",
+    adStatus: "UnPublished",
+    adType: "Free"
+  },
+  {
+    id: "3u1reuv4",
+    adTitle: "Seeds",
+    category: "Agro",
+    price: "GHC 4,000",
+    adStatus: "UnPublished",
+    adType: "Free"
   },
   {
     id: "derv1ws0",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 3,000",
+    adTitle: "Pesticides",
+    category: "Agro-products",
+    price: "GHC 8,000",
     adStatus: "Published",
-    adType: "Basic"
+    adType: "Enterprise"
   },
   {
     id: "5kma53ae",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 3,000",
+    adTitle: "Fertilizer",
+    category: "Agro-products",
+    price: "GHC 5,000",
     adStatus: "Published",
     adType: "Basic"
   },
   {
     id: "bhqecj4p",
-    adTitle: "Tractor",
+    adTitle: "Cartapillar",
     category: "Farm Machinery",
-    price: "GHC 3,000",
+    price: "GHC 70,000",
     adStatus: "Published",
-    adType: "Basic"
+    adType: "Diamond"
   },
   {
     id: "m5gr84i9",
     adTitle: "Tractor",
     category: "Farm Machinery",
+    price: "GHC 45,000",
+    adStatus: "Published",
+    adType: "Enterprise"
+  },
+  {
+    id: "m5gr84i9",
+    adTitle: "Fertilizer",
+    category: "Agro",
+    price: "GHC 5,000",
+    adStatus: "UnPublished",
+    adType: "Free"
+  },
+  {
+    id: "m5gr84i9",
+    adTitle: "Pesticides",
+    category: "Agro",
+    price: "GHC 3,000",
+    adStatus: "UnPublished",
+    adType: "Free"
+  },
+  {
+    id: "m5gr84i9",
+    adTitle: "Seeds",
+    category: "Agro",
     price: "GHC 3,000",
     adStatus: "Published",
-    adType: "Basic"
+    adType: "Diamond"
   },
   {
     id: "m5gr84i9",
     adTitle: "Tractor",
     category: "Farm Machinery",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Basic"
+    price: "GHC 30,000",
+    adStatus: "UnPublished",
+    adType: "Diamond"
   },
   {
     id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
+    adTitle: "Seeds",
+    category: "Agro",
     price: "GHC 3,000",
     adStatus: "Published",
-    adType: "Basic"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Basic"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Basic"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Basic"
+    adType: "Entreprise",
   },
 ]
 
@@ -146,25 +155,34 @@ export const columns = [
 //     enableSorting: false,
 //     enableHiding: false,
 //   },
+
+  {
+    accessorKey:"I",
+    cell: ({ row }) => (
+      <img src={fertilizer} alt="" className="h-[40px] w-[40px] rounded-full" /> 
+    ),
+  },
+
   {
     accessorKey: "adTitle",
     header: "Ad Title",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("adTitle")}</div>
+      <div className="capitalize cursor-pointer">{row.getValue("adTitle")}</div>
     ),
   },
+  
    {
     accessorKey: "category",
     header: "Category",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("category")}</div>
+      <div className="capitalize cursor-pointer">{row.getValue("category")}</div>
     ),
   },
    {
     accessorKey: "price",
     header: "Price",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("price")}</div>
+      <div className="capitalize cursor-pointer">{row.getValue("price")}</div>
     ),
   },
   {
@@ -179,13 +197,15 @@ export const columns = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("adStatus")}</div>,
+    cell: ({ row }) => <div className="text-yellow-button cursor-pointer">{row.getValue("adStatus")}</div>,
   },
   {
     accessorKey: "adType",
     header: () => <div className="text-right">Ad Type</div>,
-    cell: ({ row }) => {
-      const adType = parseFloat(row.getValue("adType"))
+    cell: ({ row }) => (
+      <div className="capitalize text-primary-color cursor-pointer">{row.getValue("adType")}</div>
+    )
+   
 
       // Format the amount as a dollar amount
       // const formatted = new Intl.NumberFormat("en-US", {
@@ -194,7 +214,7 @@ export const columns = [
       // }).format(adype)
 
       // return <div className="text-right font-medium">{formatted}</div>
-    },
+    
   },
   {
     id: "actions",
@@ -203,35 +223,21 @@ export const columns = [
       const payment = row.original
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              {/* <span className="sr-only">Open menu</span> */} 
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              View Ad
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit Ad</DropdownMenuItem>
-            <DropdownMenuItem>Delete Ad</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div>
+
+        </div>
+        
       )
     },
   },
 ]
 
-export function DataTableDemo() {
+export function DataTableDemo({setProduct}) {
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
+  // const [product, setProduct] = React.useState(data[0])
 
   const table = useReactTable({
     data,
@@ -253,7 +259,7 @@ export function DataTableDemo() {
   })
 
   return (
-    <div className="w-full">
+    <div className="w-full px-5">
       <div className="flex items-center py-4">
         <Input
           placeholder="Search Ads.."
@@ -290,7 +296,7 @@ export function DataTableDemo() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border"> 
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -316,6 +322,7 @@ export function DataTableDemo() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => {setProduct(row.original)}}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
