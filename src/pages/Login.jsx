@@ -1,4 +1,10 @@
 // import {  Flex, Text, Button } from "@radix-ui/themes"
+import { Link } from "react-router";
+import { apiClient } from "../api/client";
+import { useNavigate } from "react-router";
+import SubmitButton from "@/components/SubmitButton";
+
+
 import eye from "../assets/images/eye.png";
 import google from "../assets/images/google.webp";
 import apple from "../assets/images/apple.png";
@@ -7,7 +13,24 @@ import logo from "../assets/images/newlogo.png";
 import checkbox from "../assets/images/checkbox.png";
 import { useState } from "react";
 
-export default function SignUp() {
+export default function login() {
+    const navigate = useNavigate();
+    const loginUser = async (data) => {
+        try {
+            const response = await apiClient.post("/auth/login", data, {
+                headers: {
+                    "content-type": "application/json"
+                }
+            });
+            console.log(response); localStorage.setItem
+                ("ACCESS_TOKEN", response.data.data.accessToken);
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -34,12 +57,12 @@ export default function SignUp() {
                         Don’t have an <br />Account yet?
                     </h3>
                     <button className="w-full sm:w-48 font-bold rounded-full p-2 mt-4 border hover:bg-[#32BB78] hover:border-none">
-                        <a href="">Sign Up</a>
+                        <Link to="/sign-up">Sign Up</Link>
                     </button>
                 </div>
 
                 {/* Right Form Section */}
-                <form className="w-full max-w-[450px] md:mt-5 backdrop-blur-md bg-darkest-heading border-white/30 rounded-xl shadow-xl p-7  text-white">
+                <form action={loginUser} className="w-full max-w-[450px] md:mt-5 backdrop-blur-md bg-darkest-heading border-white/30 rounded-xl shadow-xl p-7  text-white" onSubmit={loginUser}>
                     <h3 className="text-3xl md:text-4xl mt-5 font-normal font-lato mb-2">Welcome back!</h3>
                     <p className="mb-10">Login to your account</p>
 
@@ -47,6 +70,7 @@ export default function SignUp() {
                     <div className="flex flex-col gap-4">
                         <input
                             type="email"
+                            name = "email"
                             placeholder="Enter Your Email"
                             required
                             className="bg-white text-black rounded p-3 border w-full"
@@ -70,12 +94,13 @@ export default function SignUp() {
                     </div>
 
                     {/* Login Button */}
-                    <button
+                    {/* <button
                         type="submit"
                         className="bg-[#B2BB32] text-[#143324] w-full rounded-3xl py-3 mt-3 font-medium"
                     >
                         Log In
-                    </button>
+                    </button> */}
+                    <SubmitButton className="bg-[#B2BB32] text-[#143324] w-full rounded-3xl py-3 mt-3 font-medium" title={"log In"} />
 
                     {/* Remember Me & Forgot Password */}
                     <div className="flex justify-between items-center mt-6 text-xs flex-wrap gap-2">
