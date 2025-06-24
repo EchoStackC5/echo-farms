@@ -19,11 +19,10 @@ export default function login() {
         try {
             const response = await apiClient.post("/auth/login", data, {
                 headers: {
-                    "content-type": "application/json"
+                    "Content-Type": "application/json"
                 }
             });
-            console.log(response); localStorage.setItem
-                ("ACCESS_TOKEN", response.data.data.accessToken);
+            console.log(response); localStorage.setItem("ACCESS_TOKEN", response.data.token);
             navigate("/");
         } catch (error) {
             console.log(error);
@@ -70,7 +69,7 @@ export default function login() {
                     <div className="flex flex-col gap-4">
                         <input
                             type="email"
-                            name = "email"
+                            name="email"
                             placeholder="Enter Your Email"
                             required
                             className="bg-white text-black rounded p-3 border w-full"
