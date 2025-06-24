@@ -11,6 +11,8 @@ import ProductDetails from "./pages/ProductDetails"
 import Trials from "./pages/trials";
 import AdForm from "./pages/dashboard/AdForm";
 import ProductsPage from "./pages/products/ProductPage";
+import AdvertsForm from "./pages/AdvertsFrom";
+
 
 const echoFarmsRoutes = createBrowserRouter([
   {
@@ -35,13 +37,17 @@ const echoFarmsRoutes = createBrowserRouter([
     path: "product-details",
     element: <ProductDetails />
   },
-  {
-    path: "/trials",
-    element: <Trials />
-  },
+  // {
+  //   path: "/trials",
+  //   element: <Trials />
+  // },
    {
     path: "/products-page",
     element: <ProductsPage/>
+  },
+  {
+    path: "/adverts-form",
+    element: <AdvertsForm/>
   },
 
   // {
