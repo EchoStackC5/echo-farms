@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import fertilizer from "../assets/fertilizer.png"
+import drakula from "../assets/drakula.jpg"
 import * as React from "react"
 import {
   flexRender,
@@ -64,7 +64,7 @@ const data = [
     category: "Agro-products",
     price: "GHC 8,000",
     adStatus: "Published",
-    adType: "Enterprise"
+    adType: "Entreprise"
   },
   {
     id: "5kma53ae",
@@ -80,7 +80,7 @@ const data = [
     category: "Farm Machinery",
     price: "GHC 70,000",
     adStatus: "Published",
-    adType: "Diamond"
+    adType: "Free"
   },
   {
     id: "m5gr84i9",
@@ -88,7 +88,7 @@ const data = [
     category: "Farm Machinery",
     price: "GHC 45,000",
     adStatus: "Published",
-    adType: "Enterprise"
+    adType: "Entreprise"
   },
   {
     id: "m5gr84i9",
@@ -112,7 +112,7 @@ const data = [
     category: "Agro",
     price: "GHC 3,000",
     adStatus: "Published",
-    adType: "Diamond"
+    adType: "Entreprise"
   },
   {
     id: "m5gr84i9",
@@ -120,7 +120,7 @@ const data = [
     category: "Farm Machinery",
     price: "GHC 30,000",
     adStatus: "UnPublished",
-    adType: "Diamond"
+    adType: "Basic"
   },
   {
     id: "m5gr84i9",
@@ -159,7 +159,7 @@ export const columns = [
   {
     accessorKey:"I",
     cell: ({ row }) => (
-      <img src={fertilizer} alt="" className="h-[40px] w-[40px] rounded-full" /> 
+      <img src={drakula} alt="" className="h-[40px] w-[40px] rounded-full" /> 
     ),
   },
 
@@ -197,13 +197,13 @@ export const columns = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className="text-yellow-button cursor-pointer">{row.getValue("adStatus")}</div>,
+    cell: ({ row }) => <div style={{color: row.getValue("adStatus") === "UnPublished" ? 'maroon' : 'green'}} className="cursor-pointer">{row.getValue("adStatus")}</div>,
   },
   {
     accessorKey: "adType",
     header: () => <div className="text-right">Ad Type</div>,
     cell: ({ row }) => (
-      <div className="capitalize text-primary-color cursor-pointer">{row.getValue("adType")}</div>
+      <div style={{color: row.getValue("adType")=== "Basic" ? 'yellow' : row.getValue("adType")=== "Entreprise" ? 'green' : 'purple'}} className="capitalize cursor-pointer">{row.getValue("adType")}</div>
     )
    
 
@@ -232,7 +232,7 @@ export const columns = [
   },
 ]
 
-export function DataTableDemo({setProduct}) {
+export function DataTableDemo({setProduct, setDisplay}) {
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
@@ -259,7 +259,7 @@ export function DataTableDemo({setProduct}) {
   })
 
   return (
-    <div className="w-full px-5">
+    <div className="w-full px-5 bg-white border border-light-border rounded-2xl">
       <div className="flex items-center py-4">
         <Input
           placeholder="Search Ads.."
@@ -322,7 +322,7 @@ export function DataTableDemo({setProduct}) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => {setProduct(row.original)}}
+                  onClick={() => {setProduct(row.original), setDisplay(true)}}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
