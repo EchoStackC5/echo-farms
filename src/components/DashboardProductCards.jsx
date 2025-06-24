@@ -1,10 +1,12 @@
 import { Flex, Text, Button, } from "@radix-ui/themes"
 import { ChartNoAxesColumn } from "lucide-react"
 import Linechart from "../assets/Linechart.png"
+
+
 export default function DashboardProductCards() {
     return (
         <section className="flex justify-between md:mt-10">
-            <div className="bg-darkest-heading md:p-4 rounded-lg md:space-y-4 w-[350px]">
+            <div className="bg-darkest-heading md:p-6 rounded-lg md:space-y-4 w-[350px]">
                 {/* Basic Ads Card */}
                 <div className="flex group bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C] h-20 w-full justify-between items-center md:px-4 rounded-md shadow transition-colors duration-300">
                     <div className="flex flex-col text-left">
@@ -29,14 +31,14 @@ export default function DashboardProductCards() {
             </div>
 
             {/* Impressions Card */}
-            <div className="bg-darkest-heading rounded-lg w-[250px] text-white flex flex-col justify-around items-center text-center md:py-5">
-                <p className="flex font-lato">4.673 <br /> Impressions</p>
+            <div className="bg-darkest-heading rounded-lg w-[250px] text-white md:py-5">
+                <p className="flex font-lato justify-around mb-5">4.673 <br /> Impressions</p>
                 <div className=" flex">
                     <img src={Linechart} alt="" />
                 </div>
             </div>
 
-            <div className="bg-darkest-heading md:p-4 rounded-lg md:space-y-4 md:w-[350px]">
+            <div className="bg-darkest-heading md:p-6 rounded-lg md:space-y-4 md:w-[350px]">
                 {/* Active Ads Card */}
                 <div className="flex group bg-white hover:bg-gradient-to-r from-[#386B52] shadow:md to-[#3C996C]  md:h-20 md:w-full justify-between items-center px-4 rounded-md shadow transition-colors duration-300">
                     <div className="flex flex-col text-left">
