@@ -8,6 +8,9 @@ export default function AdvertsForm(){
     const postPostAdverts = async (data) => {
         try {
             const response = await apiClient.post("/adverts", data, {
+                 headers: {
+                    Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
+                }
               
             })
             console.log(response.data);
