@@ -42,7 +42,7 @@ export default function AdvertsForm(){
                                 <option value="basic">Basic</option>
                                 <option value="free"> Free</option>
                                 <option value="enterprise" > Enterprise</option>
-                                
+                                 
                  </select>
                  <input name="images" type="file" multiple placeholder="uplaod products"/>
                  <SubmitButton title={"Post Ad"} className=" px-3 py-2 rounded-md text-white bg-primary-color hover:bg-green-800" />
