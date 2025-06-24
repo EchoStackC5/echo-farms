@@ -1,10 +1,18 @@
-import ProductsNav from "@/components/custom/ProductsNav"
+import ProductsNav from "@/components/custom/ProductsNav";
+import ProductHero from "@/components/custom/ProductHero";
+import ProductFilters from "@/components/custom/ProductFilters";
+import ProductpageCard from "@/components/custom/ProductPageCard";
 export default function ProductsPage(){
     return(
-        <div>
+        <div className="">
             <ProductsNav/>
-            <p>This is Products page</p>
-            <h1>This is product page main</h1>
+            <ProductHero/>
+            <div className=" px-4 md:px-12">
+<ProductFilters/>
+            <ProductpageCard/>
+            </div>
+            
+            
         </div>
     )
 }
