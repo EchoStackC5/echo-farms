@@ -11,5 +11,10 @@ export default  [
             title: "Manage Ads",
             path: "manage-ads"
         },
+         {
+            icon: <Megaphone/>,
+            title: "Add Form",
+            path: "ad-form"
+        },
 
     ]

@@ -9,6 +9,8 @@ import SignUp from "./pages/SignUp";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails"
 import Trials from "./pages/trials";
+import AdForm from "./pages/dashboard/AdForm";
+import ProductsPage from "./pages/products/ProductPage";
 
 const echoFarmsRoutes = createBrowserRouter([
   {
@@ -37,6 +39,10 @@ const echoFarmsRoutes = createBrowserRouter([
     path: "/trials",
     element: <Trials />
   },
+   {
+    path: "/products-page",
+    element: <ProductsPage/>
+  },
 
   // {
   //   path: "*",
@@ -56,6 +62,11 @@ const echoFarmsRoutes = createBrowserRouter([
         path: 'manage-ads',
         element: <ManageAds />
       },
+      {
+        path: 'ad-form',
+        element: <AdForm />
+      },
+     
       //   {
       //     path: 'genres',
       //     element:<GenresPage/>
