@@ -7,11 +7,32 @@ import { categoryOptions } from '@/components/CategoryOption';
 import Select from 'react-select';
 import RegionSelect from '@/components/LocationData';
 import { plans } from '@/components/Plans';
+import SubmitButton from '@/components/SubmitButton';
+import { apiClient } from '@/api/client';
+import { useNavigate } from 'react-router';
 
 export default function AdForm() {
     const [currentStep, setCurrentStep] = useState(0);
     const [selectedLocation, setSelectedLocation] = useState(null);
     const [selectedPlan, setSelectedPlan] = useState(null);
+    const navigae = useNavigate();
+
+    const postAd = async (data) => {
+        try {
+            const response = await apiClient.post("/adverts", data, {
+
+            })
+            console.log(response.data);
+
+
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
+    }
+
 
     const totalSteps = 4;
 
@@ -26,6 +47,8 @@ export default function AdForm() {
             setCurrentStep(currentStep - 1);
         }
     };
+
+
 
     const handleSubmit = () => {
         console.log('Form submitted!');
@@ -49,6 +72,7 @@ export default function AdForm() {
                                     <Label className="text-secondary-text text-xs sm:text-lg font-normal">Product Title <span className="text-red-400">*</span></Label>
                                     <Input
                                         type="text"
+                                        name="productTitle"
                                         required
                                         className="border border-dark-border outline-none focus-visible:outline-none focus:ring-0"
                                     />
@@ -56,7 +80,7 @@ export default function AdForm() {
                                 <div className="grid gap-2">
                                     <Label htmlFor="name" className="text-secondary-text text-xs sm:text-lg font-normal">Product Description <span className="text-red-400">*</span></Label>
                                     <textarea
-                                        id="name"
+                                        name="description"
                                         type="text"
                                         required
                                         className="border border-dark-border outline-none focus-visible:outline-none focus:ring-0 rounded-md"
@@ -66,6 +90,7 @@ export default function AdForm() {
                                     <Label className="text-secondary-text text-xs sm:text-sm font-normal">Product Price (Ghc) <span className="text-red-400">*</span></Label>
                                     <Input
                                         type="number"
+                                        name="price"
                                         required
                                         className="border border-light-border outline-none focus-visible:outline-none focus:ring-0"
                                     />
@@ -93,7 +118,7 @@ export default function AdForm() {
                                     <Select
                                         options={categoryOptions}
                                         isMulti
-                                        name='selectCategory'
+                                        name='category'
                                         required
                                         placeholder='Select Category'
                                         className='react-select-container text-sm sm:text-base'
@@ -187,6 +212,8 @@ export default function AdForm() {
                                     <RegionSelect
                                         value={selectedLocation}
                                         onChange={setSelectedLocation}
+                                        name='location'
+                                        required
                                     />
                                 </div>
                             </div>
@@ -214,6 +241,7 @@ export default function AdForm() {
                                     </Label>
                                     <Input
                                         type="file"
+                                        name="images"
                                         multiple
                                         accept="video/*,.jpg,.jpeg,.png"
                                         required
@@ -283,7 +311,7 @@ export default function AdForm() {
                     </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                         className="bg-green-500 h-2 rounded-full transition-all duration-300 ease-in-out"
                         style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
                     ></div>
@@ -291,9 +319,9 @@ export default function AdForm() {
             </div>
 
             {/* Form Step */}
-            <div className="mb-6">
+            <form action={postAd} className="mb-6">
                 {renderStep()}
-            </div>
+            </form>
 
             {/* Navigation Buttons */}
             <div className="flex justify-between mt-4">
@@ -305,14 +333,15 @@ export default function AdForm() {
                 >
                     Previous
                 </Button>
-                
+
                 {currentStep === totalSteps - 1 ? (
-                    <button 
-                        onClick={handleSubmit}
-                        className='py-3 px-3 bg-[#13813A] text-white rounded-full text-lg w-auto '
-                    >
-                        Submit
-                    </button>
+                    <SubmitButton onClick={handleSubmit} title={"Post Ad"} className=" px-3 py-2 rounded-md text-white bg-primary-color hover:bg-green-800" />
+                    // <button 
+                    //     onClick={handleSubmit}
+                    //     className='py-3 px-3 bg-[#13813A] text-white rounded-full text-lg w-auto '
+                    // >
+                    //     Submit
+                    // </button>
                 ) : (
                     <Button onClick={handleNext}>
                         Next
@@ -320,5 +349,6 @@ export default function AdForm() {
                 )}
             </div>
         </div>
+
     );
 }

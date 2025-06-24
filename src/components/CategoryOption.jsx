@@ -17,8 +17,8 @@ export default function CategoryOptions(){
        <Select             
             options={categoryOptions}
             isMulti  
-            name='selectCategory'           
-            placeholder="Select Genres"             
+            name='category'           
+            placeholder="Select Category"             
             className="basic-multi-select outline-none border text-secondary-text bg-backgrounds border-dark-border p-2 rounded-md"             
             classNamePrefix="select"         
         />
