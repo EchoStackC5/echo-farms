@@ -5,6 +5,7 @@ import useSWR from "swr"
 import { apiFetcher } from "@/api/client"
 import drakula from "../assets/drakula.jpg"
 import * as React from "react"
+import ProductFilters from "./custom/ProductFilters"
 import {
   flexRender,
   getCoreRowModel,
@@ -188,23 +189,10 @@ export const columns = [
       <div className="capitalize cursor-pointer">{row.getValue("price")}</div>
     ),
   },
-  // {
-  //   accessorKey: "adStatus",
-  //   header: ({ column }) => {
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         Ad Status
-  //       </Button>
-  //     )
-  //   },
-  //   cell: ({ row }) => <div style={{color: row.getValue("adStatus") === "UnPublished" ? 'maroon' : 'green'}} className="cursor-pointer">{row.getValue("adStatus")}</div>,
-  // },
+  
   {
     accessorKey: "plan",
-    header: () => <div className="text-right">Ad Type</div>,
+    header: () => <div className="">Ad Type</div>,
     cell: ({ row }) => (
       <div style={{color: row.getValue("plan")=== "Basic" ? 'black' : row.getValue("plan")=== "Entreprise" ? 'green' : 'purple'}} className="capitalize cursor-pointer">{row.getValue("plan")}</div>
     )
@@ -287,42 +275,9 @@ export function DataTableDemo({setProduct, setDisplay}) {
 
   return (
     <div className="w-full px-5 bg-white border border-light-border rounded-2xl">
-      {/* <div className="flex items-center py-4">
-        <Input
-          placeholder="Search Ads.."
-          value={table.getColumn("adstatus")?.getFilterValue() ?? ""}
-          onChange={(event) =>
-            table.getColumn("adstatus")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div> */}
+      <div className="flex items-center py-4">
+        <ProductFilters/>
+      </div>
       <div className="rounded-md border"> 
         <Table>
           <TableHeader>

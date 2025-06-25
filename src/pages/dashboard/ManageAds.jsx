@@ -2,6 +2,7 @@
 import { DataTableDemo } from "@/components/Productsdata"
 import Productimage from "@/components/Productimage"
 import { useState } from "react"
+import ProductFilters from "@/components/custom/ProductFilters"
 
 export default function ManageAds() {
 
@@ -22,6 +23,7 @@ export default function ManageAds() {
             </div>
             <div className="flex gap-10">
                 <div className="w-full">
+                    
                     <DataTableDemo setProduct={setProduct} setDisplay={setDisplay} />
                 </div>
                 <div className="">
