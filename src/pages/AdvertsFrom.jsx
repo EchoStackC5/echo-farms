@@ -152,10 +152,17 @@ export default function AdvertsForm() {
             name="location"
             className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring focus:border-green-400"
           >
-            <option>Accra</option>
-            <option>Kumasi</option>
-            <option>Ho</option>
-            <option>Tema</option>
+
+            <option>Greater Accra, Tema</option>
+            <option>Ashanti, Kumasi</option>
+            <option>Western, Takoradi</option>
+            <option>Eastern, Koforidua</option>
+            <option>Central, Cape Coast</option>
+            <option>Volta, Ho</option>
+            <option>Northern, Tamale</option>
+            <option>Upper East, Bolgatanga</option>
+            <option>Upper West, Wa</option>
+            <option>Bono, Sunyani</option>
           </select>
         </div>
 

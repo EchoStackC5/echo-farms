@@ -11,6 +11,7 @@ import product7 from "@/assets/product7.svg";
 import { apiFetcher } from "@/api/client";
 import useSWR from "swr";
 import { BeatLoader } from "react-spinners";
+import { useNavigate } from "react-router";
 
 
 const Products = [
@@ -82,19 +83,23 @@ const Products = [
 
 export default function ProductpageCard() {
     const { data, isLoading, error } = useSWR("/adverts", apiFetcher);
+    const navigate = useNavigate();
     if (isLoading) {
         return (
             <div><BeatLoader size={100} /></div>
         )
     }
 
-    if (error) {
+    if (error || !data) {
         return (
             <div>
                 <p>Something went wrong</p>
             </div>
         )
     }
+    
+    
+
     return (
          <div className="mt-12">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
@@ -102,6 +107,7 @@ export default function ProductpageCard() {
                     <div
                         key={product._id || index}
                         className="w-full bg-backgrounds border border-light-border shadow-lg rounded-lg overflow-hidden"
+                        onClick={() => navigate(`/product-details`)}
                     >
                         {/* Image Container with Overlay Badge */}
                         <div className="relative">

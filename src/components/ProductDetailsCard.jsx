@@ -5,15 +5,45 @@ import ratings from "../assets/yellowRating.svg";
 import img2 from "../assets/productDetail2.svg";
 import img3 from "../assets/productDetail3.svg";
 import Navbar from "../components/ProductNavbar";
+import { useSearchParams } from "react-router";
+import useSWR from "swr";
+import { apiFetcher } from "@/api/client";
+
 
 export default function ProductDetailsCard() {
+      const [searchParams] = useSearchParams();
+    const id = searchParams.get("id");
+
+    const { data, isLoading, error } = useSWR(`/adverts/${id}`, apiFetcher);
+    // useEffect(() =>{
+    //     scrollTo(0, 0)
+    // }, [id]);
+
+    if (isLoading) {
+        return (
+            <div>
+                <p>loading event detail...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div>
+                <p>something went wrong</p>
+            </div>
+        );
+    }
+    const images = data.images && data.images.length > 0 ? data.images : [{ url: img1 }];
+    const mainImage = images[0]?.url || img1;
+
     return (
         <section className="bg-[#F5FAF8] min-h-screen px-4 py-8">
             <Navbar />
             <div className="flex flex-col md:mt-30 md:flex-row md:space-x-20">
                 <div className="relative bg-[#143324] h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl">
                     <img src={shadow} alt="" className="absolute mt-59 md:mt-90 w-[90%] md:w-[670px] " />
-                    <img src={img1} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight" />
+                    <img src={mainImage} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight" />
                 </div>
                 <style>
                     {`
@@ -41,20 +71,19 @@ export default function ProductDetailsCard() {
                         <span className="font-medium">Availability:</span> Only 2 in stocks
                     </h6>
                     <h3 className="text-2xl text-[#143324] font-bold pt-2">
-                        AGROBOOST ORAGANIC FERTILIZER - 50KG
+                        {data.productTitle}
                     </h3>
                     <img src={ratings} alt="" className="mt-2" />
                     <p className="break-words max-w-full md:max-w-[450px] text-wrap leading-snug text-[#507362] font-inter mt-3">
-                        AgroBoost Organic Fertilizer is a premium-grade soil enhancer designed to improve crop yield and promote healthy plant growth. Perfect for vegetables, grains, fruits, and general farm use.
+                       {data.description}
                     </p>
                     <hr className="mt-10" />
                     <div className="space-x-3 mt-10">
-                        <button className="rounded-full text-xs bg-white shadow-sm border-1 border-[#F5FAF8] w-[114px] h-[39px] text-[#507362]">
-                            crop protection
-                        </button>
-                        <button className="rounded-full text-xs bg-white shadow-sm border-1 border-[#F5FAF8] w-[164px] h-[39px] text-[#507362]">
-                            seed & planting materials
-                        </button>
+                        {data.category && (
+                            <button className="rounded-full text-xs bg-white shadow-sm border-1 border-[#F5FAF8] w-auto px-4 h-[39px] text-[#507362]">
+                                {data.category}
+                            </button>
+                        )}
                     </div>
                     <hr className="mt-10" />
                     <div>
@@ -62,7 +91,7 @@ export default function ProductDetailsCard() {
                             USD(incl. of all taxes):
                         </h3>
                         <h2 className="text-4xl font-normal text-[#143324] mt-1">
-                            GHC 600.72{" "}
+                            GHC  {data.price}
                             <span className="text-3xl text-gray-300 font-thin">GHC 800.00</span>
                         </h2>
                     </div>
