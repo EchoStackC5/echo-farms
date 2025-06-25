@@ -25,7 +25,7 @@ export default function ManageAds() {
                     <DataTableDemo setProduct={setProduct} setDisplay={setDisplay} />
                 </div>
                 <div className="">
-                    <Productimage isVisible={display} setisVisible={setDisplay}/>
+                    <Productimage isVisible={display} setisVisible={setDisplay} product={product}/>
                 </div>
                 
                 

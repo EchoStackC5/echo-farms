@@ -1,3 +1,4 @@
+import ProductpageCard from "./custom/ProductPageCard";
 import img1 from "../assets/productDetail1.svg";
 import shadow from "../assets/productShawdow.svg";
 import ratings from "../assets/yellowRating.svg";
@@ -96,6 +97,7 @@ export default function ProductDetailsCard() {
                     <img src={img3} alt="" className="h-[137px] w-[129px]" />
                 </div>
             </div>
+            <ProductpageCard/>
         </section>
 
     )
