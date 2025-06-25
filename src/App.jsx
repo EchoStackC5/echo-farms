@@ -37,10 +37,10 @@ const echoFarmsRoutes = createBrowserRouter([
     path: "product-details",
     element: <ProductDetails />
   },
-  // {
-  //   path: "/trials",
-  //   element: <Trials />
-  // },
+  {
+    path: "/trials",
+    element: <Trials />
+  },
    {
     path: "/products-page",
     element: <ProductsPage/>
