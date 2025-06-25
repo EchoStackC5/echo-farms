@@ -1,5 +1,8 @@
 "use client"
 import { useState } from "react"
+import { BeatLoader } from "react-spinners"
+import useSWR from "swr"
+import { apiFetcher } from "@/api/client"
 import drakula from "../assets/drakula.jpg"
 import * as React from "react"
 import {
@@ -33,104 +36,104 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const data = [
-  {
-    id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 60,000",
-    adStatus: "Published",
-    adType: "Basic"
-  },
-  {
-    id: "3u1reuv4",
-    adTitle: "Seeds",
-    category: "Agro",
-    price: "GHC 4,000",
-    adStatus: "UnPublished",
-    adType: "Free"
-  },
-  {
-    id: "3u1reuv4",
-    adTitle: "Seeds",
-    category: "Agro",
-    price: "GHC 4,000",
-    adStatus: "UnPublished",
-    adType: "Free"
-  },
-  {
-    id: "derv1ws0",
-    adTitle: "Pesticides",
-    category: "Agro-products",
-    price: "GHC 8,000",
-    adStatus: "Published",
-    adType: "Entreprise"
-  },
-  {
-    id: "5kma53ae",
-    adTitle: "Fertilizer",
-    category: "Agro-products",
-    price: "GHC 5,000",
-    adStatus: "Published",
-    adType: "Basic"
-  },
-  {
-    id: "bhqecj4p",
-    adTitle: "Cartapillar",
-    category: "Farm Machinery",
-    price: "GHC 70,000",
-    adStatus: "Published",
-    adType: "Free"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 45,000",
-    adStatus: "Published",
-    adType: "Entreprise"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Fertilizer",
-    category: "Agro",
-    price: "GHC 5,000",
-    adStatus: "UnPublished",
-    adType: "Free"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Pesticides",
-    category: "Agro",
-    price: "GHC 3,000",
-    adStatus: "UnPublished",
-    adType: "Free"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Seeds",
-    category: "Agro",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Entreprise"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Tractor",
-    category: "Farm Machinery",
-    price: "GHC 30,000",
-    adStatus: "UnPublished",
-    adType: "Basic"
-  },
-  {
-    id: "m5gr84i9",
-    adTitle: "Seeds",
-    category: "Agro",
-    price: "GHC 3,000",
-    adStatus: "Published",
-    adType: "Entreprise",
-  },
-]
+// const data = [
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Tractor",
+//     category: "Farm Machinery",
+//     price: "GHC 60,000",
+//     adStatus: "Published",
+//     adType: "Basic"
+//   },
+//   {
+//     id: "3u1reuv4",
+//     adTitle: "Seeds",
+//     category: "Agro",
+//     price: "GHC 4,000",
+//     adStatus: "UnPublished",
+//     adType: "Free"
+//   },
+//   {
+//     id: "3u1reuv4",
+//     adTitle: "Seeds",
+//     category: "Agro",
+//     price: "GHC 4,000",
+//     adStatus: "UnPublished",
+//     adType: "Free"
+//   },
+//   {
+//     id: "derv1ws0",
+//     adTitle: "Pesticides",
+//     category: "Agro-products",
+//     price: "GHC 8,000",
+//     adStatus: "Published",
+//     adType: "Entreprise"
+//   },
+//   {
+//     id: "5kma53ae",
+//     adTitle: "Fertilizer",
+//     category: "Agro-products",
+//     price: "GHC 5,000",
+//     adStatus: "Published",
+//     adType: "Basic"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     adTitle: "Cartapillar",
+//     category: "Farm Machinery",
+//     price: "GHC 70,000",
+//     adStatus: "Published",
+//     adType: "Free"
+//   },
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Tractor",
+//     category: "Farm Machinery",
+//     price: "GHC 45,000",
+//     adStatus: "Published",
+//     adType: "Entreprise"
+//   },
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Fertilizer",
+//     category: "Agro",
+//     price: "GHC 5,000",
+//     adStatus: "UnPublished",
+//     adType: "Free"
+//   },
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Pesticides",
+//     category: "Agro",
+//     price: "GHC 3,000",
+//     adStatus: "UnPublished",
+//     adType: "Free"
+//   },
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Seeds",
+//     category: "Agro",
+//     price: "GHC 3,000",
+//     adStatus: "Published",
+//     adType: "Entreprise"
+//   },
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Tractor",
+//     category: "Farm Machinery",
+//     price: "GHC 30,000",
+//     adStatus: "UnPublished",
+//     adType: "Basic"
+//   },
+//   {
+//     id: "m5gr84i9",
+//     adTitle: "Seeds",
+//     category: "Agro",
+//     price: "GHC 3,000",
+//     adStatus: "Published",
+//     adType: "Entreprise",
+//   },
+// ]
 
 export const columns = [
 //   {
@@ -157,17 +160,17 @@ export const columns = [
 //   },
 
   {
-    accessorKey:"I",
+    accessorKey:"images",
     cell: ({ row }) => (
       <img src={drakula} alt="" className="h-[40px] w-[40px] rounded-full" /> 
     ),
   },
 
   {
-    accessorKey: "adTitle",
+    accessorKey: "productTitle",
     header: "Ad Title",
     cell: ({ row }) => (
-      <div className="capitalize cursor-pointer">{row.getValue("adTitle")}</div>
+      <div className="capitalize cursor-pointer">{row.getValue("productTitle")}</div>
     ),
   },
   
@@ -185,25 +188,25 @@ export const columns = [
       <div className="capitalize cursor-pointer">{row.getValue("price")}</div>
     ),
   },
+  // {
+  //   accessorKey: "adStatus",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         Ad Status
+  //       </Button>
+  //     )
+  //   },
+  //   cell: ({ row }) => <div style={{color: row.getValue("adStatus") === "UnPublished" ? 'maroon' : 'green'}} className="cursor-pointer">{row.getValue("adStatus")}</div>,
+  // },
   {
-    accessorKey: "adStatus",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Ad Status
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div style={{color: row.getValue("adStatus") === "UnPublished" ? 'maroon' : 'green'}} className="cursor-pointer">{row.getValue("adStatus")}</div>,
-  },
-  {
-    accessorKey: "adType",
+    accessorKey: "plan",
     header: () => <div className="text-right">Ad Type</div>,
     cell: ({ row }) => (
-      <div style={{color: row.getValue("adType")=== "Basic" ? 'yellow' : row.getValue("adType")=== "Entreprise" ? 'green' : 'purple'}} className="capitalize cursor-pointer">{row.getValue("adType")}</div>
+      <div style={{color: row.getValue("plan")=== "Basic" ? 'black' : row.getValue("plan")=== "Entreprise" ? 'green' : 'purple'}} className="capitalize cursor-pointer">{row.getValue("plan")}</div>
     )
    
 
@@ -233,14 +236,16 @@ export const columns = [
 ]
 
 export function DataTableDemo({setProduct, setDisplay}) {
+
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
+   const {data: apiData, isLoading, error} = useSWR("/adverts", apiFetcher)
   // const [product, setProduct] = React.useState(data[0])
 
   const table = useReactTable({
-    data,
+    data: apiData || [],
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -258,9 +263,31 @@ export function DataTableDemo({setProduct, setDisplay}) {
     },
   })
 
+  const handleRowClick = (row) => {
+    setProduct(product)
+    setDisplay(true)}
+ 
+  if (isLoading) {
+    return(
+      <div>
+        <BeatLoader size={100}/>
+      </div>
+  )};
+
+  if (error) {
+    return(
+      <div>
+        <p>something went wrong</p>
+      </div>
+  )}
+  
+
+
+  
+
   return (
     <div className="w-full px-5 bg-white border border-light-border rounded-2xl">
-      <div className="flex items-center py-4">
+      {/* <div className="flex items-center py-4">
         <Input
           placeholder="Search Ads.."
           value={table.getColumn("adstatus")?.getFilterValue() ?? ""}
@@ -295,7 +322,7 @@ export function DataTableDemo({setProduct, setDisplay}) {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </div> */}
       <div className="rounded-md border"> 
         <Table>
           <TableHeader>
