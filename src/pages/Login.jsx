@@ -22,7 +22,9 @@ export default function login() {
                     "Content-Type": "application/json"
                 }
             });
-            console.log(response); localStorage.setItem("ACCESS_TOKEN", response.data.token);
+            console.log(response);
+            localStorage.setItem("ACCESS_TOKEN", response.data.token);
+            localStorage.setItem("USER_ID", response.data.user.id);
             navigate("/");
         } catch (error) {
             console.log(error);
