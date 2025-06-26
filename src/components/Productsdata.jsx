@@ -215,7 +215,7 @@ export function DataTableDemo({setProduct, setDisplay}) {
           onSearch={handleSearch}
           onFilterChange={handleFilterChange}
         />
-        <Link to="/dashboard/ad-form">Upload an Ad</Link>
+        <Link to="/dashboard/ad-form" className="h-10 w-40 bg-green-buuton rounded-full text-center items-center justify-around text-white flex">Upload an Ad</Link>
       </div>
       
       {/* Optional: Show active filters */}

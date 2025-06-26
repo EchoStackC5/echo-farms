@@ -23,7 +23,6 @@ export default function ManageAds() {
             </div>
             <div className="flex gap-10">
                 <div className="w-full">
-                    
                     <DataTableDemo setProduct={setProduct} setDisplay={setDisplay} />
                 </div>
                 <div className="">
