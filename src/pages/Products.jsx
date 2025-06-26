@@ -1,9 +1,11 @@
 // src/pages/Products.jsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import ProductNavBar from "@/components/ProductNavbar";
+import { useNavigate } from 'react-router'; // Import useNavigate
+import ProductsNav from '@/components/custom/ProductsNav';
 import ProductSearchBar from "@/components/ProductSearch";
 import ProductCard from "@/components/ProductCard";
 import droneImage from '../assets/images/drone.jpg';
+import ProductHero from '@/components/custom/ProductHero';
 import Harvester from '../assets/images/harv.png';
 
 export default function Products() {
@@ -16,6 +18,8 @@ export default function Products() {
         query: '', // Initialize as empty string for search
         sortBy: null,
     });
+
+    const navigate = useNavigate(); // Initialize useNavigate
 
     // Ref for the debounce timer
     const debounceTimerRef = useRef(null);
@@ -109,14 +113,18 @@ export default function Products() {
         }
 
         // Apply debounce only for query changes, other filter changes can be immediate
-        if (currentFilters.query !== undefined && currentFilters.query !== null) { // Check if query is explicitly being set
-            debounceTimerRef.current = setTimeout(() => {
-                fetchProducts(currentFilters);
-            }, 500); // Debounce for 500ms
-        } else {
-            // For category, location, sortBy changes, fetch immediately
-            fetchProducts(currentFilters);
-        }
+        // We compare the query from currentFilters to a previous query if we had one
+        // to specifically debounce only query changes, not other filter changes.
+        const prevQuery = currentFilters.query; // Assuming currentFilters.query is the latest query
+        // If the filter change is primarily a query change, debounce
+        if (currentFilters.query !== undefined && currentFilters.query !== null) {
+             debounceTimerRef.current = setTimeout(() => {
+                 fetchProducts(currentFilters);
+             }, 500); // Debounce for 500ms
+         } else {
+             // For category, location, sortBy changes, fetch immediately
+             fetchProducts(currentFilters);
+         }
 
         // Cleanup function for useEffect
         return () => {
@@ -132,9 +140,7 @@ export default function Products() {
         setCurrentFilters(prevFilters => ({
             ...prevFilters,
             category: category,
-            // When a category is selected, we want to clear the general search query
-            // and potentially location/sort to narrow down the context.
-            // Adjust this logic based on desired UX (e.g., allow category + query)
+            // When a category is selected, we clear other filters for a fresh context
             query: '', // Clear query
             location: null, // Clear location
             sortBy: null, // Clear sort
@@ -145,7 +151,7 @@ export default function Products() {
         setCurrentFilters(prevFilters => ({
             ...prevFilters,
             location: location,
-            // When a location is selected, clear query and category for focused search
+            // When a location is selected, clear other filters
             query: '', // Clear query
             category: null, // Clear category
             sortBy: null, // Clear sort
@@ -171,44 +177,20 @@ export default function Products() {
             ...prevFilters,
             sortBy: sortByValue,
             // Keep category, location, query if you want sorting applied ON TOP of existing filters
-            // Or clear them if sorting is meant to be an independent filter action
             // For typical UX, sorting *refines* existing filters, so we keep others.
-            // category: prevFilters.category,
-            // location: prevFilters.location,
-            // query: prevFilters.query,
         }));
     }, []);
 
+    // Handler for clicking a product card
+    const handleProductClick = useCallback((productId) => {
+        navigate(`/product-details?id=${productId}`);
+    }, [navigate]);
 
     return (
-        <div className="relative bg-[#F5FAF8] min-h-screen px-4 py-8">
-            <ProductNavBar />
+        <div className="relative bg-[#F5FAF8]">
+            <ProductsNav />
 
-            {/* Banner Section */}
-            <div className="max-w-6xl w-[90%] mx-auto relative bg-cover bg-no-repeat rounded-xl overflow-hidden text-white flex items-center justify-between p-8 mt-[45px] mb-[45px] h-[60%]]"
-                style={{ backgroundImage: `url(${droneImage})` }}>
-                <div className="space-y-4 z-10">
-                    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold leading-tight">
-                        Smart Agricultural Spraying <br /> Drone – 16L Tank Capacity
-                    </h2>
-                    <p className="text-xs leading-relaxed max-w-md mt-15">
-                        Precision drone for crop spraying and watering. Covers large fields quickly,
-                        reduces chemical waste, and improves efficiency with GPS control and real-time flight feedback.
-                    </p>
-                    <button className="bg-[#d4f044] text-black font-semibold px-10 py-4 mt-25 rounded-full hover:bg-lime-400">
-                        Buy Now
-                    </button>
-                </div>
-
-                <div className="absolute top-6 right-6">
-                    <span className="border border-white rounded-full px-4 py-1 text-sm">🔥Top Ad</span>
-                </div>
-
-                <div className="absolute right-6 bottom-6 flex space-x-2">
-                    <button className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-gray-300">‹</button>
-                    <button className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-300">›</button>
-                </div>
-            </div>
+            <ProductHero/>
 
             {/* Pass handlers and initial values to ProductSearchBar */}
             <ProductSearchBar
@@ -219,7 +201,7 @@ export default function Products() {
                 initialCategory={currentFilters.category}
                 initialLocation={currentFilters.location}
                 initialQuery={currentFilters.query}
-                // initialSortBy={currentFilters.sortBy} // You might add this if ProductSearchBar needs to reflect the sort selection
+                initialSortBy={currentFilters.sortBy} // Pass sortBy to reflect in the search bar
             />
 
             <div className="w-[90%] mx-auto mt-8">
@@ -238,7 +220,11 @@ export default function Products() {
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
                     {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            onClick={() => handleProductClick(product.id)} // Pass the onClick handler
+                        />
                     ))}
                 </div>
 

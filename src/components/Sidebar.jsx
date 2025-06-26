@@ -1,10 +1,31 @@
 import { Link, NavLink } from "react-router"
-import SETUPS from "../constants/Sidebar";
+// import SETUPS from "../constants/Sidebar";
 import EchoFarmsLogo from "../assets/EcoLogoEditable.svg"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Home, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import Modal from "./Modal";
+
+import { LayoutDashboard,Megaphone} from "lucide-react";
+
+ const SETUPS =[
+        {
+            icon: <LayoutDashboard/>,
+            title: "Dashboard",
+            path: "/dashboard",
+        },
+        {
+            icon: <Megaphone/>,
+            title: "Manage Ads",
+            path: "manage-ads"
+        },
+        //  {
+        //     icon: <Megaphone/>,
+        //     title: "Add Form",
+        //     path: "ad-form"
+        // },
+
+    ]
 export default function Sidebar({ isOpen, onClose }){
     return (
       <>

@@ -1,6 +1,6 @@
 import { LayoutDashboard,Megaphone} from "lucide-react";
 
-export default  [
+ const SETUPS =[
         {
             icon: <LayoutDashboard/>,
             title: "Dashboard",
@@ -18,3 +18,4 @@ export default  [
         // },
 
     ]
+    export default SETUPS

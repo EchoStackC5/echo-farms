@@ -29,7 +29,7 @@ export default function login() {
             if (response.data.user.role === "vendor"){
                 navigate("/dashboard")
             }else {
-                navigate("/products-page")
+                navigate("/products")
             }
             
         } catch (error) {
