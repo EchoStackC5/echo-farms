@@ -4,12 +4,23 @@ import shadow from "../assets/productShawdow.svg";
 import ratings from "../assets/yellowRating.svg";
 import img2 from "../assets/productDetail2.svg";
 import img3 from "../assets/productDetail3.svg";
-import Navbar from "../components/ProductNavbar";
+// import Navbar from "../components/Navbar";
+import ProductsNav from "./custom/ProductsNav";
+import { apiFetcher } from "@/api/client";
+import useSWR from "swr";
+import { useSearchParams } from "react-router";
+import { imageBaseUrl } from "@/api/client";
+import { useEffect } from "react";
+
 
 export default function ProductDetailsCard() {
+
     return (
+        <div>
+        <ProductsNav />
         <section className="bg-[#F5FAF8] min-h-screen px-4 py-8">
-            <Navbar />
+            
+            
             <div className="flex flex-col md:mt-30 md:flex-row md:space-x-20">
                 <div className="relative bg-[#143324] h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl">
                     <img src={shadow} alt="" className="absolute mt-59 md:mt-90 w-[90%] md:w-[670px] " />
@@ -99,6 +110,7 @@ export default function ProductDetailsCard() {
             </div>
             <ProductpageCard/>
         </section>
+        </div>
 
     )
 }
