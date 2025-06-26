@@ -15,7 +15,7 @@ export default function Productimage({isVisible, setisVisible,product}) {
     return (
         <div style={{display: isVisible ? 'flex' : 'none'}} className="flex flex-col">
             <div className="md:w-[360px] pt-15 relative">
-                <img src={product?.images?.[0]?.url || product4} alt="" className="h-70 w-100 rounded-2xl"/>
+                <img src={product?.images?.[0]?.url || product4} alt="" className="h-65 w-70 rounded-2xl"/>
                 <X className="absolute top-2 right-2 text-white cursor-pointer bg-black p-1 rounded-full"/>
             </div>
             <div className="md:py-3 md:w-[360px] bg-white border-15 border-white flex flex-col rounded-sm h-75">
