@@ -12,6 +12,7 @@ import Trials from "./pages/trials";
 import AdForm from "./pages/dashboard/AdForm";
 import ProductsPage from "./pages/products/ProductPage";
 import AdvertsForm from "./pages/AdvertsFrom";
+import NotFound from "./pages/NotFoundPage";
 
 
 const echoFarmsRoutes = createBrowserRouter([
@@ -50,10 +51,10 @@ const echoFarmsRoutes = createBrowserRouter([
     element: <AdvertsForm/>
   },
 
-  // {
-  //   path: "*",
-  //   element: <NotFound/>
-  // },
+  {
+    path: "*",
+    element: <NotFound/>
+  },
 
   {
     path: "/dashboard",
@@ -72,6 +73,10 @@ const echoFarmsRoutes = createBrowserRouter([
         path: 'ad-form',
         element: <AdForm />
       },
+      // {
+      //   path: '/notFound',
+      //   element: <NotFound/>
+      // },
      
       //   {
       //     path: 'genres',
