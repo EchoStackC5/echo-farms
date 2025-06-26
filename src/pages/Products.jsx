@@ -1,6 +1,6 @@
 // src/pages/Products.jsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router'; // Import useNavigate
 import ProductsNav from '@/components/custom/ProductsNav';
 import ProductSearchBar from "@/components/ProductSearch";
 import ProductCard from "@/components/ProductCard";
