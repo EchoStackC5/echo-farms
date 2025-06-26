@@ -67,7 +67,7 @@ export default function  AdForm() {
           name="productTitle"
           type="text"
           placeholder="Enter product title"
-          className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring focus:border-green-400"
+          className="w-full px-4 py-2 border text-white border-gray-200 rounded-md focus:outline-none focus:ring focus:border-green-400"
           required
         />
       </div>
@@ -79,7 +79,7 @@ export default function  AdForm() {
         <textarea
           name="description"
           placeholder="Give a brief description about the product"
-          className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring focus:border-green-400"
+          className="w-full text-white px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring focus:border-green-400"
           rows={4}
           required
         />
@@ -130,7 +130,7 @@ export default function  AdForm() {
             name="price"
             type="number"
             placeholder="Ghc 0.00"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-green-400 placeholder-white"
+            className="w-full text-white px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-green-400 placeholder-white"
             required
           />
         </div>
@@ -151,10 +151,10 @@ export default function  AdForm() {
       </div>
 
       <div className="space-y-1">
-        <label className="text-sm font-medium text-gray-700">
+        <label className="text-lg font-medium text-white">
           Add Photos <span className="text-red-500">*</span>
         </label>
-        <p className="text-sm text-gray-500">Add a maximum of three photos</p>
+        <p className="text-sm text-white/80">Add a maximum of three photos</p>
         <input
           name="images"
           type="file"
