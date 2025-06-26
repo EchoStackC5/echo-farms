@@ -1,49 +1,94 @@
+// src/components/ProductSearchBar.jsx
 import React, { useRef, useState, useEffect } from "react";
-// Import individual Lucide icons needed for category list and the filter icon for dropdown buttons
-import {Search, ListFilter,Tractor,Bean,Leaf,FlaskConical, Wheat,PiggyBank, Fish, Bird, Sprout, HardHat, Hammer, Box,MapPin,Award} from "lucide-react";
-
-// Import your local images
+import { Search, ListFilter, Tractor, Bean, Leaf, Drone, Sun, PiggyBank, MapPin, Award } from "lucide-react";
 import Pomagranates from "../assets/images/pomagranates.png";
 import Mayoka from "../assets/images/mayoka.png";
 import Harvester from "../assets/images/harv.png";
 
-export default function ProductSearchBar() {
+export default function ProductSearchBar({
+    onCategorySelect,      // Callback for category selection
+    onLocationSelect,      // Callback for location selection
+    onSearchTrigger,       // Callback for search input change/trigger
+    onSortChange,          // Callback for sort order change (Top Ads)
+    initialCategory,       // Initial category from parent
+    initialLocation,       // Initial location from parent
+    initialQuery,          // Initial search query from parent
+    initialSortBy          // New prop: Initial sortBy from parent
+}) {
     // State for the main search popup
     const [showSearchPopup, setShowSearchPopup] = useState(false);
     const searchPopupRef = useRef(null);
-    const [query, setQuery] = useState('');
+    // Initialize query from prop, fall back to empty string
+    const [query, setQuery] = useState(initialQuery || '');
 
     // State for the category popup
     const [showCategoryPopup, setShowCategoryPopup] = useState(false);
     const categoryPopupRef = useRef(null);
     const categoryButtonRef = useRef(null);
+    // Initialize selectedCategory from prop, fall back to null
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory || null);
 
     // State for the location popup
     const [showLocationPopup, setShowLocationPopup] = useState(false);
     const locationPopupRef = useRef(null);
     const locationButtonRef = useRef(null);
+    // Initialize selectedLocation from prop, fall back to null
+    const [selectedLocation, setSelectedLocation] = useState(initialLocation || null);
 
-    // State for the top ads popup
+    // State for the top ads popup (sorting)
     const [showTopAdsPopup, setShowTopAdsPopup] = useState(false);
     const topAdsPopupRef = useRef(null);
     const topAdsButtonRef = useRef(null);
+    // Initialize selectedTopAdFilter from prop
+    const [selectedTopAdFilter, setSelectedTopAdFilter] = useState(initialSortBy || null);
 
-    // Placeholder for onSearch function, replace with actual implementation if needed
-    const onSearch = (value) => {
-        console.log("Searching for:", value);
-        // Implement your search logic here
-    };
+    // Update internal state when parent props change (e.g., when a filter is cleared externally)
+    useEffect(() => {
+        setSelectedCategory(initialCategory || null);
+    }, [initialCategory]);
+
+    useEffect(() => {
+        setSelectedLocation(initialLocation || null);
+    }, [initialLocation]);
+
+    useEffect(() => {
+        setQuery(initialQuery || '');
+        // When initialQuery changes (e.g., cleared by category selection), hide the popup
+        if (initialQuery === '') {
+            setShowSearchPopup(false);
+        }
+    }, [initialQuery]);
+
+    useEffect(() => {
+        setSelectedTopAdFilter(initialSortBy || null);
+    }, [initialSortBy]);
 
     const handleInputChange = (event) => {
         const newQuery = event.target.value;
         setQuery(newQuery);
-        // onSearch(newQuery); // Uncomment if onSearch is intended to filter content in the popup
+
+        // Hide the search popup as soon as typing begins
+        // This prevents the "Popular on EchoFarms" from showing while the user is typing
+        if (newQuery.length > 0) {
+            setShowSearchPopup(false);
+        } else {
+            // If the user clears the input, and the input still has focus,
+            // you might want to show popular items again. Or keep it hidden.
+            // For now, if cleared, keep it hidden.
+             setShowSearchPopup(false);
+        }
+
+        // Trigger the parent's search handler immediately on input change
+        // The parent (Products.jsx) will handle the debouncing.
+        if (onSearchTrigger) {
+            onSearchTrigger(newQuery);
+        }
     }
 
     // Close all popups on outside click
     useEffect(() => {
         function handleClickOutside(e) {
-            // Close search popup if clicked outside
+            // Close search popup if clicked outside AND it's not the search input itself
             if (searchPopupRef.current && !searchPopupRef.current.contains(e.target) && !e.target.closest('.search-input-container')) {
                 setShowSearchPopup(false);
             }
@@ -69,60 +114,40 @@ export default function ProductSearchBar() {
         {
             name: "Pomagranates Seeds ",
             price: "₵2,200 per pack",
-            image: Pomagranates, // Correct: direct reference to imported image
+            image: Pomagranates,
             alt: "Pomegranate seeds",
         },
         {
             name: "Mayoka Lodia Seeds",
             price: "₵1,200 per pack",
-            image: Mayoka, // Correct: direct reference to imported image
+            image: Mayoka,
             alt: "Mayoka Seeds Bag",
         },
         {
             name: "Harvester",
             price: "₵1,200 per hour",
-            image: Harvester, // Correct: direct reference to imported image
+            image: Harvester,
             alt: "Harvester",
         },
     ];
 
     // Data for categories, used in the category popup - NOW WITH ICONS!
     const categories = [
-        { name: "Farm Machinery", icon: <Tractor className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Seeds & Seedlings", icon: <Bean className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Fertilizers", icon: <Leaf className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Pesticides", icon: <FlaskConical className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Animal Feed", icon: <Wheat className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Livestock", icon: <PiggyBank className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Fishery", icon: <Fish className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Poultry", icon: <Bird className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Irrigation Systems", icon: <Sprout className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Protective Gear", icon: <HardHat className="w-4 h-4 mr-2 text-gray-500" /> },
-        { name: "Harvesting Tools", icon: <Hammer className="w-4 h-4 mr-2 text-gray-500" /> }, // Reusing Hammer for now
-        { name: "Other Farm Products", icon: <Box className="w-4 h-4 mr-2 text-gray-500" /> },
+        { name: "Farm Machinery", icon: <Tractor className="w-4 h-4 mr-2 text-[#52B467]" /> },
+        { name: "Crop Protection", icon: <Leaf className="w-4 h-4 mr-2 text-[#52B467]" /> },
+        { name: "Seed & Planting Materials", icon: <Bean className="w-4 h-4 mr-2 text-[#52B467]" /> },
+        { name: "Animal Husbandry Products", icon: <PiggyBank className="w-4 h-4 mr-2 text-[#52B467]" /> },
+        { name: "Drones", icon: <Drone className="w-4 h-4 mr-2 text-[#52B467]" /> },
+        { name: "Solar Energy", icon: <Sun className="w-4 h-4 mr-2 text-[#52B467]" /> },
     ];
 
     // Data for locations, used in the location popup
     const locations = [
-        "Greater Accra",
-        "Ashanti",
-        "Volta",
-        "Central",
-        "Eastern",
-        "Western",
-        "Northern",
-        "Upper East",
-        "Upper West",
-        "Bono",
-        "Ahafo",
-        "Western North",
-        "Oti",
-        "Savannah",
-        "North East",
-        "Bono East",
+        "Greater Accra", "Kumasi","Tema","Ashanti", "Volta", "Central", "Eastern", "Western", "Northern",
+        "Upper East", "Upper West", "Bono", "Ahafo", "Western North", "Oti", "Savannah", "North East", "Bono East",
     ];
 
-    // Data for top ads filters, used in the top ads popup
+    // Data for top ads filters, used in the top ads popup (renamed to reflect sorting)
     const topAdsFilters = [
         "Most Recent",
         "Price: Low to High",
@@ -139,6 +164,33 @@ export default function ProductSearchBar() {
         setShowTopAdsPopup(false);
     };
 
+    // Handler for category selection
+    const handleCategorySelectInternal = (categoryName) => {
+        setSelectedCategory(categoryName);
+        setShowCategoryPopup(false);
+        if (onCategorySelect) { // Call the parent's callback
+            onCategorySelect(categoryName);
+        }
+    };
+
+    // Handler for location selection
+    const handleLocationSelectInternal = (locationName) => {
+        setSelectedLocation(locationName);
+        setShowLocationPopup(false);
+        if (onLocationSelect) {
+            onLocationSelect(locationName);
+        }
+    };
+
+    // Handler for top ad filter selection (sorting)
+    const handleTopAdFilterSelectInternal = (filterName) => {
+        setSelectedTopAdFilter(filterName);
+        setShowTopAdsPopup(false);
+        if (onSortChange) { // Use onSortChange prop
+            onSortChange(filterName);
+        }
+    };
+
     return (
         <div className="relative">
             {/* Filter Bar */}
@@ -152,14 +204,17 @@ export default function ProductSearchBar() {
                         placeholder="Search products..."
                         onFocus={() => {
                             closeAllPopups(); // Close others
-                            setShowSearchPopup(true);
+                            // Only show search popup if the query is empty
+                            if (query === '') {
+                                setShowSearchPopup(true);
+                            }
                         }}
                         value={query}
                         onChange={handleInputChange}
-                        className="pl-14 pr-3 py-3 w-full rounded-full bg-white text-base border border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 text-[#6B7280]"
+                        className="pl-14 pr-3 py-3 w-full rounded-full bg-white text-base border border-green-700 focus:outline-none focus:ring-1 focus:ring-gray-500 text-[#6B7280]"
                     />
                     <div className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-transparent rounded-full flex items-center justify-center">
-                        <Search className="w-5 h-5 text-gray-500" />
+                        <Search className="w-5 h-5 text-green-700" />
                     </div>
                 </div>
 
@@ -174,22 +229,24 @@ export default function ProductSearchBar() {
                                 setShowLocationPopup(!showLocationPopup);
                             }}
                             className="text-sm bg-white hover:bg-gray-300 rounded-xl px-3 py-2 flex items-center border border-gray-300 text-[#35413B]">
-                            Location <MapPin className="h-[12px] w-[12px] ml-1" /> {/* Using MapPin for location */}
+                            {selectedLocation ? selectedLocation : "Location"} <MapPin className="h-[12px] w-[12px] ml-1" />
                         </button>
                         {showLocationPopup && (
                             <div
                                 ref={locationPopupRef}
                                 className="absolute z-50 mt-2 w-[240px] max-h-[300px] overflow-y-auto bg-white rounded-xl shadow-lg border border-gray-200 py-2">
                                 <ul>
+                                    {/* Option to clear location filter */}
+                                    <li
+                                        className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleLocationSelectInternal(null)}>
+                                        All Locations
+                                    </li>
                                     {locations.map((location, index) => (
                                         <li
                                             key={index}
                                             className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer"
-                                            onClick={() => {
-                                                console.log("Selected location:", location);
-                                                setShowLocationPopup(false);
-                                                // Implement location filtering logic here
-                                            }}>
+                                            onClick={() => handleLocationSelectInternal(location)}>
                                             {location}
                                         </li>
                                     ))}
@@ -208,26 +265,28 @@ export default function ProductSearchBar() {
                             }}
                             className="text-sm bg-white hover:bg-gray-300 rounded-xl px-3 py-2 flex items-center border border-gray-300 text-[#35413B]"
                         >
-                            Category <ListFilter className=" h-[12px] w-[12px] ml-1" /> {/* Using ListFilter for category */}
+                            {selectedCategory ? selectedCategory : "Category"} <ListFilter className=" h-[12px] w-[12px] ml-1" />
                         </button>
                         {showCategoryPopup && (
                             <div
                                 ref={categoryPopupRef}
                                 className="absolute z-50 mt-2 w-[240px] max-h-[300px] overflow-y-auto bg-white rounded-xl shadow-lg border border-gray-200 font-semibold py-2">
-
                                 <ul>
-                                    {categories.map((category, index) => (
+                                    {/* Option to clear category filter */}
+                                    <li
+                                        className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer flex items-center"
+                                        onClick={() => handleCategorySelectInternal(null)} // Pass null to clear filter
+                                    >
+                                        All Categories
+                                    </li>
+                                    {categories.map((category) => (
                                         <li
-                                            key={category.name} // Use category.name as key for better uniqueness
-                                            className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer flex items-center" // Added flex and items-center
-                                            onClick={() => {
-                                                console.log("Selected category:", category.name); // Access category.name
-                                                setShowCategoryPopup(false);
-                                                // Implement category filtering logic here
-                                            }}
+                                            key={category.name}
+                                            className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer flex items-center"
+                                            onClick={() => handleCategorySelectInternal(category.name)}
                                         >
-                                            {category.icon} {/* Render the icon */}
-                                            {category.name} {/* Render the category name */}
+                                            {category.icon}
+                                            {category.name}
                                         </li>
                                     ))}
                                 </ul>
@@ -235,7 +294,7 @@ export default function ProductSearchBar() {
                         )}
                     </div>
 
-                    {/* Top Ads Dropdown */}
+                    {/* Top Ads Dropdown (Sorting) */}
                     <div className="relative">
                         <button
                             ref={topAdsButtonRef}
@@ -245,7 +304,7 @@ export default function ProductSearchBar() {
                             }}
                             className="text-sm bg-white hover:bg-gray-300 rounded-xl px-3 py-2 flex items-center border border-gray-300 text-[#35413B]"
                         >
-                            Top Ads <Award className=" h-[12px] w-[12px] ml-1" /> {/* Using Award for top ads */}
+                            {selectedTopAdFilter ? selectedTopAdFilter : "Top Ads"} <Award className=" h-[12px] w-[12px] ml-1" />
                         </button>
                         {showTopAdsPopup && (
                             <div
@@ -253,16 +312,17 @@ export default function ProductSearchBar() {
                                 className="absolute z-50 mt-2 w-[240px] max-h-[300px] overflow-y-auto bg-white rounded-xl shadow-lg border border-gray-200 py-2"
                             >
                                 <ul>
+                                    {/* Option to clear sorting filter */}
+                                    <li
+                                        className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer"
+                                        onClick={() => handleTopAdFilterSelectInternal(null)}>
+                                        Default Sort
+                                    </li>
                                     {topAdsFilters.map((filter, index) => (
                                         <li
                                             key={index}
                                             className="px-4 py-2 text-sm text-[#35413B] hover:bg-gray-100 cursor-pointer"
-                                            onClick={() => {
-                                                console.log("Selected filter:", filter);
-                                                setShowTopAdsPopup(false);
-                                                // Implement top ads filtering logic here
-                                            }}
-                                        >
+                                            onClick={() => handleTopAdFilterSelectInternal(filter)}>
                                             {filter}
                                         </li>
                                     ))}
