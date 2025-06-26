@@ -10,7 +10,7 @@ export default function HeroSection(){
             </div>
             <div className="flex  flex-col justify-center items-center md:flex-row gap-3 mt-16 ">
                 <Link to= "/sign-up" className="bg-yellow-button max-w-full md:max-w-[200px] w-full text-center text-darkest-heading px-6 py-3 text-lg font-roboto font-medium rounded-full hover:bg-primary-color transition-all duration-200  active:bg-primary-color active:text-darkest-heading ">Earn with Echo</Link>
-                <Link to= "/products-page" className="bg-transparent max-w-full md:max-w-[200px] border text-center w-full border-light-border  text-white hover:text-darkest-heading px-6 py-3 text-lg font-roboto font-medium rounded-full hover:bg-primary-color transition-all duration-200 active:bg-primary-color active:text-darkest-heading hover:border-none active:border-none">Browse Products</Link>
+                <Link to= "/products" className="bg-transparent max-w-full md:max-w-[200px] border text-center w-full border-light-border  text-white hover:text-darkest-heading px-6 py-3 text-lg font-roboto font-medium rounded-full hover:bg-primary-color transition-all duration-200 active:bg-primary-color active:text-darkest-heading hover:border-none active:border-none">Browse Products</Link>
             </div>
             <HeroSearchFilter/>
             

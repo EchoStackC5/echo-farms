@@ -5,7 +5,7 @@ import Linechart from "../assets/Linechart.png"
 
 
 export default function DashboardProductCards() {
-      const {data: apiData, isLoading, error} = useSWR("/adverts/vendor/dashboard", apiFetcher);
+    //   const {data: apiData, isLoading, error} = useSWR("/adverts/vendor/dashboard", apiFetcher);
 
 
 
