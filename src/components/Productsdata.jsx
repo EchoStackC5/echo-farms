@@ -6,6 +6,7 @@ import { apiFetcher } from "@/api/client"
 import drakula from "../assets/drakula.jpg"
 import * as React from "react"
 import ProductFilters from "./custom/ProductFilters"
+
 import {
   flexRender,
   getCoreRowModel,
@@ -17,7 +18,6 @@ import {
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-// import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -36,204 +36,135 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
-// const data = [
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Tractor",
-//     category: "Farm Machinery",
-//     price: "GHC 60,000",
-//     adStatus: "Published",
-//     adType: "Basic"
-//   },
-//   {
-//     id: "3u1reuv4",
-//     adTitle: "Seeds",
-//     category: "Agro",
-//     price: "GHC 4,000",
-//     adStatus: "UnPublished",
-//     adType: "Free"
-//   },
-//   {
-//     id: "3u1reuv4",
-//     adTitle: "Seeds",
-//     category: "Agro",
-//     price: "GHC 4,000",
-//     adStatus: "UnPublished",
-//     adType: "Free"
-//   },
-//   {
-//     id: "derv1ws0",
-//     adTitle: "Pesticides",
-//     category: "Agro-products",
-//     price: "GHC 8,000",
-//     adStatus: "Published",
-//     adType: "Entreprise"
-//   },
-//   {
-//     id: "5kma53ae",
-//     adTitle: "Fertilizer",
-//     category: "Agro-products",
-//     price: "GHC 5,000",
-//     adStatus: "Published",
-//     adType: "Basic"
-//   },
-//   {
-//     id: "bhqecj4p",
-//     adTitle: "Cartapillar",
-//     category: "Farm Machinery",
-//     price: "GHC 70,000",
-//     adStatus: "Published",
-//     adType: "Free"
-//   },
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Tractor",
-//     category: "Farm Machinery",
-//     price: "GHC 45,000",
-//     adStatus: "Published",
-//     adType: "Entreprise"
-//   },
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Fertilizer",
-//     category: "Agro",
-//     price: "GHC 5,000",
-//     adStatus: "UnPublished",
-//     adType: "Free"
-//   },
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Pesticides",
-//     category: "Agro",
-//     price: "GHC 3,000",
-//     adStatus: "UnPublished",
-//     adType: "Free"
-//   },
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Seeds",
-//     category: "Agro",
-//     price: "GHC 3,000",
-//     adStatus: "Published",
-//     adType: "Entreprise"
-//   },
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Tractor",
-//     category: "Farm Machinery",
-//     price: "GHC 30,000",
-//     adStatus: "UnPublished",
-//     adType: "Basic"
-//   },
-//   {
-//     id: "m5gr84i9",
-//     adTitle: "Seeds",
-//     category: "Agro",
-//     price: "GHC 3,000",
-//     adStatus: "Published",
-//     adType: "Entreprise",
-//   },
-// ]
+import { Link } from "react-router"
 
 export const columns = [
-//   {
-//     id: "select",
-//     header: ({ table }) => (
-//       <Checkbox
-//         checked={
-//           table.getIsAllPageRowsSelected() ||
-//           (table.getIsSomePageRowsSelected() && "indeterminate")
-//         }
-//         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-//         aria-label="Select all"
-//       />
-//     ),
-//     cell: ({ row }) => (
-//       <Checkbox
-//         checked={row.getIsSelected()}
-//         onCheckedChange={(value) => row.toggleSelected(!!value)}
-//         aria-label="Select row"
-//       />
-//     ),
-//     enableSorting: false,
-//     enableHiding: false,
-//   },
-
   {
     accessorKey:"images",
     cell: ({ row }) => (
       <img src={drakula} alt="" className="h-[40px] w-[40px] rounded-full" /> 
     ),
   },
-
   {
     accessorKey: "productTitle",
     header: "Ad Title",
     cell: ({ row }) => (
       <div className="capitalize cursor-pointer">{row.getValue("productTitle")}</div>
-    ),
+  ),
+},
+{
+  accessorKey: "category",
+  header: "Category",
+  cell: ({ row }) => {
+    const category = row.getValue("category");
+    return (
+      <div className="capitalize cursor-pointer">
+        {Array.isArray(category) ? category[0] : ""}
+      </div>
+    );
   },
-  
-   {
-    accessorKey: "category",
-    header: "Category",
-    cell: ({ row }) => (
-      <div className="capitalize cursor-pointer">{row.getValue("category")}</div>
-    ),
-  },
-   {
+},
+
+  {
     accessorKey: "price",
     header: "Price",
     cell: ({ row }) => (
       <div className="capitalize cursor-pointer">{row.getValue("price")}</div>
     ),
   },
-  
   {
     accessorKey: "plan",
     header: () => <div className="">Ad Type</div>,
     cell: ({ row }) => (
-      <div style={{color: row.getValue("plan")=== "Basic" ? 'black' : row.getValue("plan")=== "Entreprise" ? 'green' : 'purple'}} className="capitalize cursor-pointer">{row.getValue("plan")}</div>
+      <div 
+        style={{
+          color: row.getValue("plan") === "Basic" ? 'black' : 
+                 row.getValue("plan") === "Entreprise" ? 'green' : 'purple'
+        }} 
+        className="capitalize cursor-pointer"
+      >
+        {row.getValue("plan")}
+      </div>
     )
-   
-
-      // Format the amount as a dollar amount
-      // const formatted = new Intl.NumberFormat("en-US", {
-      //   style: "currency",
-      //   currency: "USD",
-      // }).format(adype)
-
-      // return <div className="text-right font-medium">{formatted}</div>
-    
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
       const payment = row.original
-
-      return (
-        <div>
-
-        </div>
-        
-      )
+      return <div></div>
     },
   },
 ]
 
 export function DataTableDemo({setProduct, setDisplay}) {
-
   const [sorting, setSorting] = React.useState([])
   const [columnFilters, setColumnFilters] = React.useState([])
   const [columnVisibility, setColumnVisibility] = React.useState({})
   const [rowSelection, setRowSelection] = React.useState({})
-   const {data: apiData, isLoading, error} = useSWR("/adverts", apiFetcher)
-  // const [product, setProduct] = React.useState(data[0])
+  
+
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedFilter, setSelectedFilter] = useState("")
+  const [filteredData, setFilteredData] = useState([])
+
+  const {data: apiData, isLoading, error} = useSWR("/adverts/vendor/dashboard", apiFetcher)
+
+  React.useEffect(() => {
+    if (!apiData) {
+      setFilteredData([])
+      return
+    }
+
+    let filtered = [...apiData]
+
+  
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(item => 
+        item.productTitle?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.category?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.price?.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
+
+   
+    if (selectedFilter) {
+     
+      if (selectedFilter.includes('-')) {
+        
+        filtered = filtered.filter(item => {
+          const itemLocation = `${item.city}-${item.region}` 
+          return itemLocation === selectedFilter
+        })
+      } else {
+        // Category or plan filter
+        const filterCategories = {
+          'FarmMachinery': 'Farm Machinery',
+          'CropProtection': 'Crop Protection',  
+          'PlantingMaterials': 'Seeds & Planting Materials',
+          'Animal': 'Animal Husbandry Products',
+          'Drones': 'Drones',
+          'SolarEnergy': 'Solar Energy',
+          'basic': 'Basic',
+          'free': 'Free', 
+          'enterprice': 'Entreprise'
+        }
+
+        const filterValue = filterCategories[selectedFilter] || selectedFilter
+
+        filtered = filtered.filter(item => 
+          item.category === filterValue || 
+          item.plan === filterValue ||
+          item.plan?.toLowerCase() === selectedFilter.toLowerCase()
+        )
+      }
+    }
+
+    setFilteredData(filtered)
+  }, [apiData, searchQuery, selectedFilter])
 
   const table = useReactTable({
-    data: apiData || [],
+    data: filteredData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -251,33 +182,68 @@ export function DataTableDemo({setProduct, setDisplay}) {
     },
   })
 
-  const handleRowClick = (row) => {
-    setProduct(product)
-    setDisplay(true)}
- 
+  // Handler functions for child components
+  const handleSearch = (query) => {
+    setSearchQuery(query)
+  }
+
+  const handleFilterChange = (filterValue) => {
+    setSelectedFilter(filterValue)
+  }
+
   if (isLoading) {
     return(
       <div>
         <BeatLoader size={100}/>
       </div>
-  )};
+    )
+  }
 
   if (error) {
     return(
       <div>
-        <p>something went wrong</p>
+        <p>Something went wrong</p>
       </div>
-  )}
-  
-
-
-  
+    )
+  }
 
   return (
     <div className="w-full px-5 bg-white border border-light-border rounded-2xl">
       <div className="flex items-center py-4">
-        <ProductFilters/>
+        <ProductFilters 
+          products={apiData} 
+          onSearch={handleSearch}
+          onFilterChange={handleFilterChange}
+        />
+        <Link to="/dashboard/ad-form">Upload an Ad</Link>
       </div>
+      
+      {/* Optional: Show active filters */}
+      {(searchQuery || selectedFilter) && (
+        <div className="mb-4 flex gap-2 items-center text-sm text-gray-600">
+          <span>Active filters:</span>
+          {searchQuery && (
+            <span className="bg-blue-100 px-2 py-1 rounded">
+              Search: "{searchQuery}"
+            </span>
+          )}
+          {selectedFilter && (
+            <span className="bg-green-100 px-2 py-1 rounded">
+              Filter: {selectedFilter}
+            </span>
+          )}
+          <button 
+            onClick={() => {
+              setSearchQuery("")
+              setSelectedFilter("")
+            }}
+            className="text-red-500 hover:underline ml-2"
+          >
+            Clear all
+          </button>
+        </div>
+      )}
+
       <div className="rounded-md border"> 
         <Table>
           <TableHeader>
@@ -322,17 +288,21 @@ export function DataTableDemo({setProduct, setDisplay}) {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  {searchQuery || selectedFilter ? 
+                    `No results found for current filters.` : 
+                    'No results.'
+                  }
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </div>
+      
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          Showing {table.getFilteredRowModel().rows.length} of {filteredData.length} results
+          {(searchQuery || selectedFilter) && ` (filtered from ${apiData?.length || 0} total)`}
         </div>
         <div className="space-x-2">
           <Button
@@ -354,7 +324,5 @@ export function DataTableDemo({setProduct, setDisplay}) {
         </div>
       </div>
     </div>
-
-    
   )
 }

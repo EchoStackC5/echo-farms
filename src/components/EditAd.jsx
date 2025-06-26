@@ -8,10 +8,11 @@ import { SquarePen, CheckCircle } from "lucide-react"
 export default function EditAd({ product }) {
 
 
-  const [advert, setadvert] = useState({});
+  const [advert, setadvert] = useState({ product });
   const [isOpen, setIsOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
 
   const getAdvert = () => {
     apiClient.get(`/adverts/${product?.id}`)
@@ -29,9 +30,12 @@ export default function EditAd({ product }) {
   const patchAdvert = async (data) => {
     try {
       const response = await apiClient.patch(`/adverts/${product?.id}`, data, {
-        // headers:{
+        // header:{
         //     "Content-Type": "application/json"
         // }
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
+        }
       });
       console.log(response.data)
 
@@ -106,7 +110,7 @@ export default function EditAd({ product }) {
               Select Category <span className="text-red-500">*</span>
             </label>
             <select multiple
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring focus:border-green-400"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring focus:border-green-400"
               name="category">
               <option>Farm Machinery</option>
               <option>Crop Protection</option>

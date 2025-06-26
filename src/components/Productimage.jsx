@@ -28,8 +28,9 @@ export default function Productimage({isVisible, setisVisible,product}) {
                             <MapPin className="h-4 w-4 mt-3"/>
                             <p className="font-lato text-secondary-text mt-2">{product?.location}</p>
                         </div>
+                        
                         <EditAd product={product} />
-                        <DeleteAd id={product} />
+                        <DeleteAd id={product?.id} />
                         
                     </div>
                 </div>

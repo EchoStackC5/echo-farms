@@ -18,9 +18,9 @@ export default function Home() {
     const [selectedProduct, setSelectedProduct] = useState(0)
     if (isLoading) {
         return (
-            <div>
-                <BeatLoader />
-            </div>
+            <div className="flex justify-center items-center h-screen">
+  <BeatLoader size={80} color="#32BB78" />
+</div>
         )
     }
 
