@@ -9,11 +9,35 @@ import ProductsNav from "./custom/ProductsNav";
 import { apiFetcher } from "@/api/client";
 import useSWR from "swr";
 import { useSearchParams } from "react-router";
-import { imageBaseUrl } from "@/api/client";
+// import { imageBaseUrl } from "@/api/client";
 import { useEffect } from "react";
 
 
 export default function ProductDetailsCard() {
+     const [searchParams] = useSearchParams();
+    const id = searchParams.get("id");
+
+    const { data, isLoading, error } = useSWR(`/adverts/${id}`, apiFetcher);
+    // useEffect(() =>{
+    //     scrollTo(0, 0)
+    // }, [id]);
+
+    if (isLoading) {
+        return (
+            <div>
+                <p>loading event detail...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div>
+                <p>something went wrong</p>
+            </div>
+        );
+    }
+
 
     return (
         <div>
@@ -22,9 +46,9 @@ export default function ProductDetailsCard() {
             
             
             <div className="flex flex-col md:mt-30 md:flex-row md:space-x-20">
-                <div className="relative bg-[#143324] h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl">
-                    <img src={shadow} alt="" className="absolute mt-59 md:mt-90 w-[90%] md:w-[670px] " />
-                    <img src={mainImage} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight" />
+                <div className="relative  h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl">
+                    {/* <img src={shadow} alt="" className="absolute mt-59 md:mt-90 w-[90%] md:w-[670px] " /> */}
+                    <img  src={data.images[0]?.url} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight" />
                 </div>
                 <style>
                     {`
@@ -96,7 +120,7 @@ export default function ProductDetailsCard() {
             </div>
 
             {/* Thumbnail images grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full md:w-[150px] gap-6 md:gap-50 ml-0 md:ml-6 mt-10">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full md:w-[150px] gap-6 md:gap-50 ml-0 md:ml-6 mt-10">
                 <div className="bg-white border-[#DAF2E6] h-[170px] w-full md:w-[150px] flex items-center pl-1 border-1">
                     <img src={img1} alt="" className="h-[137px] w-[129px]" />
                 </div>
@@ -106,7 +130,7 @@ export default function ProductDetailsCard() {
                 <div className="bg-white border-[#DAF2E6] h-[170px] w-full md:w-[150px] flex items-center pl-1 border-1">
                     <img src={img3} alt="" className="h-[137px] w-[129px]" />
                 </div>
-            </div>
+            </div> */}
             <ProductpageCard/>
         </section>
         </div>

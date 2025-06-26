@@ -7,7 +7,7 @@ import "@/styles/styles.css"
 import { useNavigate } from "react-router";
 
 export default function  AdForm() {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const postPostAdverts = async (data) => {
     try {
       const response = await apiClient.post("/adverts", data, {
@@ -16,7 +16,7 @@ export default function  AdForm() {
         },
       });
       console.log(response.data);
-      navigate("/dashboard")
+      navigate("/dashboard/manage-ads")
     } catch (error) {
       console.log(error);
     }
@@ -89,7 +89,7 @@ export default function  AdForm() {
       <label className="block text-lg font-medium text-white/80 mb-2">
         Select Category <span className="text-red-500">*</span>
       </label>
-     <select multiple className="w-full text-white border-light-border border px-4 py-3 rounded-md">
+     <select name="category" multiple className="w-full text-white border-light-border border px-4 py-3 rounded-md">
       <option>Solar Energy</option>
       <option>Farm Machinery</option>
       <option>Crop Protection</option>

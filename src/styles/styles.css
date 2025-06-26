@@ -1,8 +1,3 @@
 html {
   scroll-behavior: smooth;
 }
-input::placeholder,
-textarea::placeholder {
-  color: #fff !important;
-  opacity: 1; /* Ensures full opacity */
-}
