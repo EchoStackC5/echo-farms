@@ -1,9 +1,11 @@
 // src/components/ProductCard.jsx
 import { MapPin, Star, StarHalf } from "lucide-react";
 
+// Add onClick to the props
 export default function ProductCard({
   product, // This prop should be the actual product object from the API
   maxRating = 5,
+  onClick, // New prop: onClick handler for the card
 }) {
   // --- IMPORTANT FIX: Check if product is defined ---
   if (!product) {
@@ -12,8 +14,6 @@ export default function ProductCard({
   }
 
   // Destructure properties directly from the 'product' object
-  // Renamed from 'name' to 'productTitle' to match API response field
-  // Renamed 'image_url' to 'images' to match API response field (which is an array of image objects)
   const {
     id, // Ensure your API response for product includes 'id'
     productTitle, // Matches API response
@@ -49,11 +49,12 @@ export default function ProductCard({
   const deepGrayColor = "#4B5563"; // This corresponds to Tailwind's gray-600
 
   return (
-    // Removed the outer 'mt-20' and the internal 'grid grid-cols...' wrapper.
-    // The margin and grid should be handled by the parent component (Products.jsx)
-    // Apply the width, background, border, shadow, and rounded classes directly here.
-    <div className="max-w-[280px] sm:max-w-[320px] bg-backgrounds border border-light-border shadow-lg rounded-lg overflow-hidden mx-auto transition-transform hover:scale-103 hover:shadow-green-500">
-
+    // Add onClick handler to the main div and make it a button-like element for accessibility
+    <button
+      className="max-w-[280px] sm:max-w-[320px] bg-backgrounds border border-light-border shadow-lg rounded-lg overflow-hidden mx-auto transition-transform hover:scale-103 hover:shadow-green-500 cursor-pointer block text-left p-0" // Added block, text-left, p-0, and cursor-pointer
+      onClick={onClick} // Attach the onClick prop here
+      aria-label={`View details for ${productTitle}`}
+    >
       {/* Image */}
       <div className="relative">
         <img
@@ -121,13 +122,16 @@ export default function ProductCard({
             <span className="text-[#35413B] text-[15px] ml-1">({rating.toFixed(1)})</span>
           </div>
 
-
           {/* Add to Cart Button */}
-          <button className="border font-poppins font-medium border-darkest-heading text-darkest-heading py-2 px-4 rounded-full cursor-pointer hover:animate-pulse text-sm">
+          {/* This button should prevent the parent (card) click event from firing if it's inside the card */}
+          <button
+            className="border font-poppins font-medium border-darkest-heading text-darkest-heading py-2 px-4 rounded-full hover:animate-pulse text-sm"
+            onClick={(e) => { e.stopPropagation(); /* Add to cart logic here */ }} // Stop propagation
+          >
             Add to Cart
           </button>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
