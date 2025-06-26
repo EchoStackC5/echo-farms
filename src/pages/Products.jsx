@@ -1,9 +1,10 @@
 // src/pages/Products.jsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import ProductNavBar from "@/components/ProductNavbar";
+import ProductsNav from '@/components/custom/ProductsNav';
 import ProductSearchBar from "@/components/ProductSearch";
 import ProductCard from "@/components/ProductCard";
 import droneImage from '../assets/images/drone.jpg';
+import ProductHero from '@/components/custom/ProductHero';
 import Harvester from '../assets/images/harv.png';
 
 export default function Products() {
@@ -181,11 +182,11 @@ export default function Products() {
 
 
     return (
-        <div className="relative bg-[#F5FAF8] min-h-screen px-4 py-8">
-            <ProductNavBar />
+        <div className="relative bg-[#F5FAF8]">
+            <ProductsNav />
 
             {/* Banner Section */}
-            <div className="max-w-6xl w-[90%] mx-auto relative bg-cover bg-no-repeat rounded-xl overflow-hidden text-white flex items-center justify-between p-8 mt-[45px] mb-[45px] h-[60%]]"
+            {/* <div className="max-w-6xl w-[90%] mx-auto relative bg-cover bg-no-repeat rounded-xl overflow-hidden text-white flex items-center justify-between p-8 mt-[45px] mb-[45px] h-[60%]]"
                 style={{ backgroundImage: `url(${droneImage})` }}>
                 <div className="space-y-4 z-10">
                     <h2 className="text-lg sm:text-xl md:text-2xl font-semibold leading-tight">
@@ -208,7 +209,8 @@ export default function Products() {
                     <button className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-gray-300">‹</button>
                     <button className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center hover:bg-300">›</button>
                 </div>
-            </div>
+            </div> */}
+            <ProductHero/>
 
             {/* Pass handlers and initial values to ProductSearchBar */}
             <ProductSearchBar
@@ -238,7 +240,8 @@ export default function Products() {
                 )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
                     {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} 
+                        onClick={() => navigate(`/product-details?id=${product.id}`)}/>
                     ))}
                 </div>
 

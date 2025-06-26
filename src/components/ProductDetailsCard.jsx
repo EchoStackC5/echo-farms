@@ -15,9 +15,7 @@ export default function ProductDetailsCard() {
     const id = searchParams.get("id");
 
     const { data, isLoading, error } = useSWR(`/adverts/${id}`, apiFetcher);
-    // useEffect(() =>{
-    //     scrollTo(0, 0)
-    // }, [id]);
+   
 
     if (isLoading) {
         return (
