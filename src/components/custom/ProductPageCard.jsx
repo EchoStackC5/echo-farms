@@ -11,6 +11,7 @@ import product7 from "@/assets/product7.svg";
 import { apiFetcher } from "@/api/client";
 import useSWR from "swr";
 import { BeatLoader } from "react-spinners";
+import { useNavigate } from "react-router";
 
 
 const Products = [
@@ -82,26 +83,38 @@ const Products = [
 
 export default function ProductpageCard() {
     const { data, isLoading, error } = useSWR("/adverts", apiFetcher);
+    const navigate = useNavigate();
     if (isLoading) {
         return (
             <div><BeatLoader size={100} /></div>
         )
     }
 
-    if (error) {
+    if (error || !data) {
         return (
             <div>
                 <p>Something went wrong</p>
             </div>
         )
     }
+
+
+
     return (
-         <div className="mt-12">
+        <div className="mt-12">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {data.map((product, index) => (
                     <div
                         key={product._id || index}
                         className="w-full bg-backgrounds border border-light-border shadow-lg rounded-lg overflow-hidden"
+                        onClick={() => {
+                            if (product._id) {
+                                navigate(`/product-details?id=${product._id}`);
+                            } else {
+                                console.warn("Product ID is missing");
+                            }
+                        }}
+
                     >
                         {/* Image Container with Overlay Badge */}
                         <div className="relative">
@@ -124,7 +137,7 @@ export default function ProductpageCard() {
                                 />
                             )}
                             {/* Top Ad Badge Overlay */}
-                             {product.plan === "Enterprise" && (
+                            {product.plan === "Enterprise" && (
                                 <div className="absolute top-3 left-3">
                                     <span className="border border-white text-xs rounded-full text-white px-3 py-1.5 flex items-center gap-1">
                                         🔥 Top Ad

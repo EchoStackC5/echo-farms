@@ -25,7 +25,13 @@ export default function login() {
             console.log(response);
             localStorage.setItem("ACCESS_TOKEN", response.data.token);
             localStorage.setItem("USER_ID", response.data.user.id);
-            navigate("/");
+
+            if (response.data.user.role === "vendor"){
+                navigate("/dashboard")
+            }else {
+                navigate("/products-page")
+            }
+            
         } catch (error) {
             console.log(error);
         }

@@ -1,17 +1,30 @@
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
-import { categoryOptions } from '@/components/CategoryOption';
-import Select from 'react-select';
-import RegionSelect from '@/components/LocationData';
-import { plans } from '@/components/Plans';
-import SubmitButton from '@/components/SubmitButton';
-import { apiClient } from '@/api/client';
-import { useNavigate } from 'react-router';
-export default function AdForm(){
-    const [isOpen, setIsOpen] = useState(false);
+import SubmitButton from "@/components/SubmitButton";
+import { apiClient } from "@/api/client";
+import React, { useState } from 'react';
+import { ChevronDown, X } from 'lucide-react';
+import AdHero from "@/components/custom/AdHero";
+import "@/styles/styles.css"
+import { useNavigate } from "react-router";
+
+export default function  AdForm() {
+  const navigate = useNavigate;
+  const postPostAdverts = async (data) => {
+    try {
+      const response = await apiClient.post("/adverts", data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`,
+        },
+      });
+      console.log(response.data);
+      navigate("/dashboard")
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+
+   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState(['Crop Protection', 'Seeds & Planting Materials']);
   
   const options = [
@@ -22,7 +35,6 @@ export default function AdForm(){
     'Drones',
     'Solar Energy'
   ];
-
   const toggleOption = (option) => {
     setSelectedItems(prev => 
       prev.includes(option) 
@@ -34,54 +46,132 @@ export default function AdForm(){
   const removeItem = (item) => {
     setSelectedItems(prev => prev.filter(selected => selected !== item));
   };
-  
-      const postPostAdverts = async (data) => {
-        try {
-            const response = await apiClient.post("/adverts", data, {
-                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
-                }
-              
-            })
-            console.log(response.data);
-                
-        } catch (error) {
-            console.log(error);
-            
-        }
 
-        
-    }
-    return(
-        <form action={postPostAdverts}  className="flex flex-col">
-                    <input name="productTitle" type="text" placeholder="product title" className="border-gray-400 px-5 py-5"/>
-                    <input name="description" type="text" placeholder="product description" className="border-gray-400 px-5 py-5"/>
-                
-                         <select multiple name="category" className="h-10 w-165 bg-white text-xs rounded-md px-2">
-                                        <option >Farm Machinery</option>
-                                        <option >Crop Protection</option>
-                                        <option >Seeds & Planting Materials</option>
-                                        <option >Animal Husbandry Products</option>
-                                         <option>Drones</option>
-                                          <option >Solar Energy</option>
-        
-                         </select>
-                         <select  name="location" className="h-10 w-165 bg-white text-xs rounded-md px-2">
-                                        <option value="farm"> Accra</option>
-                                        <option value="cropProtection"> Kumasi</option>
-                                        <option value="science-fair"> Ho</option>
-                                        <option value="business"> Tema</option>
-                         </select>
-                    
-                     <input name="price" type="number" placeholder="enter price" className="border-gray-400 px-5 py-5"/>
-                      <select  name="plan" className="h-10 w-165 bg-white text-xs rounded-md px-2">
-                                        <option value="Basic">Basic</option>
-                                        <option value="Free Trial"> Free Trial</option>
-                                        <option value="Enterprise" > Enterprise</option>
-                                         
-                         </select>
-                         <input name="images" type="file" multiple placeholder="uplaod products"/>
-                         <SubmitButton title={"Post Ad"} className=" px-3 py-2 rounded-md text-white bg-primary-color hover:bg-green-800" />
-                </form> 
-    )
+  return (
+    <div className="flex flex-col gap-22">
+      <div className="flex justify-center items-center">
+        <AdHero/>
+      </div>
+    <form
+      action={postPostAdverts}
+      className="bg-darkest-heading max-w-2xl mx-auto  p-6 rounded-lg shadow-lg space-y-5 font-roboto"
+    >
+      <h2 className="text-2xl font-semibold text-white">Upload an Ad</h2>
+      <p className="text-lg text-white/80">Provide the fields below to upload an ad</p>
+
+      <div className="space-y-1">
+        <label className="text-lg font-medium text-white/80">
+          Product Title <span className="text-red-500">*</span>
+        </label>
+        <input
+          name="productTitle"
+          type="text"
+          placeholder="Enter product title"
+          className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring focus:border-green-400"
+          required
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-lg font-medium text-white/80">
+          Description <span className="text-red-500">*</span>
+        </label>
+        <textarea
+          name="description"
+          placeholder="Give a brief description about the product"
+          className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring focus:border-green-400"
+          rows={4}
+          required
+        />
+      </div>
+
+        <div className="w-full max-w-md">
+      <label className="block text-lg font-medium text-white/80 mb-2">
+        Select Category <span className="text-red-500">*</span>
+      </label>
+     <select multiple className="w-full text-white border-light-border border px-4 py-3 rounded-md">
+      <option>Solar Energy</option>
+      <option>Farm Machinery</option>
+      <option>Crop Protection</option>
+      <option>Seeds & Planting Materials</option>
+      <option>Animal Husbandry Products</option>
+      <option>Seeds & Planting Materials</option>
+      <option>Drones</option>
+      </select>
+    </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-white/80">
+            Select Location <span className="text-red-500">*</span>
+          </label>
+          <select
+            name="location"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring focus:border-green-400"
+          >
+            <option className="text-white">Greater Accra, Tema</option>
+            <option>Ashanti, Kumasi</option>
+            <option>Western, Takoradi</option>
+            <option>Eastern, Koforidua</option>
+            <option>Central, Cape Coast</option>
+            <option>Volta, Ho</option>
+            <option>Northern, Tamale</option>
+            <option>Upper East, Bolgatanga</option>
+            <option>Upper West, Wa</option>
+            <option>Bono, Sunyani</option>
+          </select>
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-lg font-medium text-white/80">
+            Product Price <span className="text-red-500">*</span>
+          </label>
+          <input
+            name="price"
+            type="number"
+            placeholder="Ghc 0.00"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-green-400 placeholder-white"
+            required
+          />
+        </div>
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-lg font-medium text-white/80">
+          Choose Plan <span className="text-red-500">*</span>
+        </label>
+        <select
+          name="plan"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-white focus:outline-none focus:ring focus:border-green-400"
+        >
+          <option value="Basic">Basic</option>
+          <option value="Free Trial">Free Trial</option>
+          <option value="Enterprise">Enterprise</option>
+        </select>
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-sm font-medium text-gray-700">
+          Add Photos <span className="text-red-500">*</span>
+        </label>
+        <p className="text-sm text-gray-500">Add a maximum of three photos</p>
+        <input
+          name="images"
+          type="file"
+          multiple
+          accept="image/*,video/*"
+          className="w-full h-[100px] px-3 py-2 border  border-gray-300 rounded-md text-sm bg-backgrounds focus:outline-none focus:ring focus:border-green-400"
+        />
+      </div>
+
+      <div className="pt-4">
+        <SubmitButton
+          title={"Post Ad"}
+          className="w-full py-2 rounded-md text-black bg-yellow-button hover:bg-primary-color"
+        />
+      </div>
+    </form>
+    </div>
+  );
 }
+

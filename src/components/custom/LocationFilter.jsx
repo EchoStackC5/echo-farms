@@ -111,7 +111,7 @@ const filterCategories = {
     items: [
       { value: "basic", label: "Basic" },
       { value: "free", label: "Free" },
-      { value: "enterprice", label: "Enterprice" },
+      { value: "enterprise", label: "Enterprise" },
       
     ]
   }
