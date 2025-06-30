@@ -8,7 +8,7 @@ import { SquarePen, CheckCircle } from "lucide-react"
 export default function EditAd({ product }) {
 
 
-  const [advert, setadvert] = useState({ product });
+  const [advert, setadvert] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,7 +25,7 @@ export default function EditAd({ product }) {
       })
   }
 
-  useEffect(getAdvert, []);
+  useEffect(getAdvert, [product]);
 
   const patchAdvert = async (data) => {
     try {
