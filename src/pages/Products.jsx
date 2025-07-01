@@ -230,13 +230,13 @@ export default function Products() {
 
             </div>
 
-            <div className="flex justify-center items-center mt-25">
+            {/* <div className="flex justify-center items-center mt-25">
                 <img
                     src={Harvester}
                     alt="Harvester"
                     className="w-[90%] h-[85%] object-cover rounded-t-1xl"
                 />
-            </div>
+            </div> */}
         </div>
     );
 }

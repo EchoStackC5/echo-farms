@@ -46,7 +46,7 @@ export default function DeleteAd({ id }) {
             <div className="group">
                 <button 
                     onClick={deleteAd} 
-                    className="font-lato md:h-8 md:w-70 mt-5 bg-white border border-green-buuton rounded-full group-hover:bg-yellow-button group-hover:text-black transition-colors text-primary-color cursor-pointer"
+                    className="font-lato w-full py-2 bg-transparent border border-darkest-heading text-darkest-heading  rounded-full group-hover:bg-yellow-button group-hover:text-black transition-colors  cursor-pointer"
                 >
                     Delete Ad
                 </button>

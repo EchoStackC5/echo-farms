@@ -4,17 +4,10 @@ import Productimage from "@/components/Productimage"
 import { useState } from "react"
 import ProductFilters from "@/components/custom/ProductFilters"
 
-export default function ManageAds() {
 
-    const [display, setDisplay] = useState(false)
-    const [product, setProduct] = useState({
-        id: "m5gr84i9",
-        adTitle: "Tractor",
-        category: "Farm Machinery",
-        price: "GHC 60,000",
-        adStatus: "Published",
-        adType: "Basic"
-    })
+export default function ManageAds() {
+    const [product, setProduct] = useState(null);
+
     return (
         <section>
             <div className="md:py-8">
@@ -23,13 +16,13 @@ export default function ManageAds() {
             </div>
             <div className="flex gap-10">
                 <div className="w-full">
-                    <DataTableDemo setProduct={setProduct} setDisplay={setDisplay} />
+                    <DataTableDemo setProduct={setProduct} />
                 </div>
-                <div className="">
-                    <Productimage isVisible={display} setisVisible={setDisplay} product={product}/>
-                </div>
-                
-                
+                {product && <div className="">
+                    <Productimage isVisible={!!product} product={product} onClose={() => setProduct(null)}  />
+                </div>}
+
+
             </div>
         </section>
     )
