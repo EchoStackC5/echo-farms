@@ -208,7 +208,7 @@ export function DataTableDemo({setProduct, setDisplay}) {
   }
 
   return (
-    <div className="w-full px-5 bg-white border border-light-border rounded-2xl">
+    <div className="max-w-xl px-5 bg-white border border-light-border rounded-2xl">
       <div className="flex items-center py-4">
         <ProductFilters 
           products={apiData} 
