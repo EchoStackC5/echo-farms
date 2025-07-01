@@ -209,7 +209,7 @@ export default function Products() {
                     {currentFilters.category ? `Category: ${currentFilters.category}` :
                         currentFilters.location ? `Location: ${currentFilters.location}` :
                             currentFilters.query && currentFilters.query.trim() !== '' ? `Search Results for "${currentFilters.query}"` :
-                                "All Products"}
+                                ""}
                     {currentFilters.sortBy && ` (Sorted by: ${currentFilters.sortBy})`}
                 </h2>
 

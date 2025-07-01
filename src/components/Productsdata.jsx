@@ -81,7 +81,7 @@ export const columns = [
 
   {
     accessorKey: "price",
-    header: "Price",
+    header: "Price(GHC)",
     cell: ({ row }) => (
       <div className="capitalize cursor-pointer">{row.getValue("price")}</div>
     ),

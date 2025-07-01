@@ -9,6 +9,7 @@ import ProductsNav from "./custom/ProductsNav";
 import { apiFetcher } from "@/api/client";
 import useSWR from "swr";
 import { useSearchParams } from "react-router";
+import { BeatLoader } from "react-spinners";
 // import { imageBaseUrl } from "@/api/client";
 import { useEffect } from "react";
 
@@ -24,8 +25,8 @@ export default function ProductDetailsCard() {
 
     if (isLoading) {
         return (
-            <div>
-                <p>loading event detail...</p>
+            <div className="flex justify-center items-center h-screen">
+                <BeatLoader size={80} color="#32BB78" />
             </div>
         );
     }
@@ -46,9 +47,9 @@ export default function ProductDetailsCard() {
 
 
                 <div className="flex flex-col md:mt-30 md:flex-row md:space-x-20">
-                    <div className="relative  h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl">
+                    <div className="relative  h-[550px] w-full md:w-[550px] flex ml-0 md:ml-6 items-center mt-6 rounded-2xl ">
                         {/* <img src={shadow} alt="" className="absolute mt-59 md:mt-90 w-[90%] md:w-[670px] " /> */}
-                        <img src={data.images[0]?.url} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight" />
+                        <img src={data.images[0]?.url} alt="" className="w-[250px]  md:ml-20 md:w-[445px] h-[460px] relative animate-bounce-slight bg-none " />
                     </div>
                     <style>
                         {`
@@ -68,9 +69,9 @@ export default function ProductDetailsCard() {
                     </style>
 
 
-                    <div className="w-full mt-10 md:mt-0 md:h-[506px] md:w-[589px] mr-0 md:mr-2">
-                        <h6 className="text-sm mt-10">
-                            <span className="font-medium">Location:</span> Greater Accra
+                    <div className="w-full mt-10 md:mt-0 md:h-[506px] md:w-[589px] mr-0 md:mr-2 font-inter">
+                        <h6 className="text-lg mt-10 text-secondary-text ">
+                            <span className="font-medium text-xl text-darkest-heading">Location:</span> Greater Accra
                         </h6>
                         <h6 className="text-sm mt-1">
                             <span className="font-medium">Availability:</span> Only 2 in stocks
@@ -83,17 +84,17 @@ export default function ProductDetailsCard() {
                             {data.description}
                         </p>
                         <hr className="mt-10" />
-                        <div className="space-x-3 mt-10">
+                        <div className="space-x-3 mt-5">
                             {data.category && (
-                                <button className="rounded-full text-xs bg-white shadow-sm border-1 border-[#F5FAF8] w-auto px-4 h-[39px] text-[#507362]">
+                                <button className="rounded-full text-xs bg-white border border-light-border   w-auto px-4 h-[39px] text-[#507362]">
                                     {data.category}
                                 </button>
                             )}
                         </div>
-                        <hr className="mt-10" />
+                        <hr className="mt-5" />
                         <div>
                             <h3 className="font-inter font-medium text-[#143324] mt-5">
-                                USD(incl. of all taxes):
+                                GHC(incl. of all taxes):
                             </h3>
                             <h2 className="text-4xl font-normal text-[#143324] mt-1">
                                 GHC  {data.price}
@@ -112,11 +113,16 @@ export default function ProductDetailsCard() {
                                     +
                                 </button>
                             </div>
-                            <button className="rounded-full text-sm bg-[#B2BB32] w-[179px] h-[44px] text-[#143324]">
+                            <button className="rounded-full text-sm hover:bg-yellow-button hover:text-darkest-heading bg-green-buuton text-white font-medium w-[179px] h-[44px] ">
                                 Buy now
                             </button>
                         </div>
                     </div>
+                </div>
+
+                <div className="px-12 mt-18">
+                    <p className="text-3xl text-darkest-heading font-bold font-inter ">Related Products</p>
+                    <ProductpageCard />
                 </div>
 
                 {/* Thumbnail images grid */}
@@ -131,7 +137,7 @@ export default function ProductDetailsCard() {
                     <img src={img3} alt="" className="h-[137px] w-[129px]" />
                 </div>
             </div> */}
-                <ProductpageCard />
+                
             </section>
         </div>
 

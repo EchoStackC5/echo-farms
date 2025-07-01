@@ -8,6 +8,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
 
 export default function DeleteAd({ id }) {
     const [toast, setToast] = useState({ show: false, message: '', type: '' })
@@ -44,12 +56,30 @@ export default function DeleteAd({ id }) {
     return (
         <>
             <div className="group">
-                <button 
-                    onClick={deleteAd} 
-                    className="font-lato w-full py-2 bg-transparent border border-darkest-heading text-darkest-heading  rounded-full group-hover:bg-yellow-button group-hover:text-black transition-colors  cursor-pointer"
-                >
-                    Delete Ad
-                </button>
+                
+    <AlertDialog>
+  <AlertDialogTrigger asChild>
+    <button
+      className="font-lato w-full py-2 bg-transparent border border-darkest-heading text-darkest-heading rounded-full group-hover:bg-yellow-button group-hover:text-black transition-colors cursor-pointer"
+    >
+      Delete Ad
+    </button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your
+        ad and remove ad data from our servers.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction onClick={deleteAd}>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+                
             </div>
 
             {/* Toast Notification */}

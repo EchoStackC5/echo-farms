@@ -42,7 +42,7 @@ export default function Home() {
         const mainProducts = enterpriseProducts.slice(0, 2);
 
     return (
-        <section className="flex flex-col">
+        <section className="flex flex-col overflow-hidden">
             <DashboardCards />
             <DashboardProductCards />
             <p className="font-lato md:text-3xl font-bold py-15">🔥Hot in the market place</p>
@@ -53,9 +53,9 @@ export default function Home() {
                     <div></div>
                     
                     {currentProduct && (
-                        <section className="flex justify-between">
-                            <div className="flex justify-center mb-8">
-                            <div className="md:w-[500px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
+                        <section className="flex justify-around ">
+                            <div className="flex  mb-8">
+                            <div className="md:w-[400px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
                                 <div className="py-3">
                                     <img
                                         src={currentProduct.images?.[0]?.url || cartapillar}
@@ -63,18 +63,18 @@ export default function Home() {
                                         className="h-85  rounded-2xl object-cover w-full" />
                                 </div>
                                 <div className="md:py-5 md:space-y-3">
-                                    <h1 className="font-lato text-2xl text-darkest-heading font-medium">
+                                    <h1 className="font-lato text-xl text-darkest-heading font-medium">
                                         {currentProduct.productTitle}
                                     </h1>
                                     <button className="font-lato px-4 py-2 border border-light-border text-secondary-text font-medium rounded-full bg-[#32BB781A] text-sm">
                                         {currentProduct.category?.[0]}
                                     </button>
-                                    <p className="font-lato text-lg text-secondary-text font-medium">{currentProduct.description}</p>
+                                    <p className="font-lato text-lg text-secondary-text font-normal">{currentProduct.description}</p>
                                     <div className="flex justify-between items-center text-darkest-heading text-lg font-medium">
                                         <h1>GHC <span>{currentProduct.price}.00</span></h1>
                                         <Link
                                             to="/dashboard/ad-form"
-                                            className="font-lato px-5 py-3 bg-green-buuton text-white  text-center rounded-full font-medium"
+                                            className="font-lato text-sm px-5 py-3 bg-green-buuton text-white  text-center rounded-full font-medium"
                                         >
                                             Post similar ads
                                         </Link>
@@ -82,8 +82,8 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-center mb-8">
-                                <div className="w-[500px] h-[650px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
+                        <div className="flex  mb-8">
+                                <div className="w-[400px] h-[650px] bg-white border border-light-border flex flex-col md:px-10 rounded-2xl">
                                     <div className="py-3">
                                         <img
                                             src={dogFood}
@@ -91,18 +91,18 @@ export default function Home() {
                                             className="h-85  rounded-2xl object-cover w-full" />
                                     </div>
                                     <div className="space-y-3">
-                                        <h1 className="font-lato text-2xl text-darkest-heading font-medium">
-                                             Premium Nourish Dog Food – Healthy, Happy Tails Start Here!
+                                        <h1 className="font-lato text-xl text-darkest-heading font-medium">
+                                             Premium Nourish Dog Food 
                                         </h1>
                                         <button className="font-lato border border-light-border px-4 py-2 text-secondary-text font-medium rounded-full bg-[#32BB781A] text-sm">
                                             Animal Products
                                         </button>
-                                        <p className="font-lato text-lg text-secondary-text font-medium">A complete and balanced meal formulated to support your dog’s overall health, vitality, and energy levels.</p>
+                                        <p className="font-lato text-lg text-secondary-text font-normal">A complete and balanced meal formulated to support your dog’s overall health, vitality, and energy levels.</p>
                                         <div className="flex justify-between items-center text-darkest-heading font-medium text-xl">
                                             <h1>GHC <span>200.00</span></h1>
                                             <Link
                                                 to="/dashboard/ad-form"
-                                                className="font-lato px-5 py-3 bg-green-buuton text-white text-center rounded-full font-medium"
+                                                className="font-lato text-sm px-5 py-3 bg-green-buuton text-white text-center rounded-full font-medium"
                                             >
                                                 Post similar ads
                                             </Link>
@@ -114,7 +114,7 @@ export default function Home() {
 
                     {/* Product thumbnails for selection */}
                     {enterpriseProducts.length > 1 && (
-                        <div className="flex justify-center md:py-10 flex-wrap gap-4">
+                        <div className="flex justify-center  flex-wrap gap-4">
                             {enterpriseProducts.map((product, index) => (
                                 <div key={product._id || index} className="relative">
                                     <img

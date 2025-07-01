@@ -84,11 +84,11 @@ const Products = [
 export default function ProductpageCard() {
     const { data, isLoading, error } = useSWR("/adverts", apiFetcher);
     const navigate = useNavigate();
-    if (isLoading) {
-        return (
-            <div><BeatLoader size={100} /></div>
-        )
-    }
+    // if (isLoading) {
+    //     <div className="flex justify-center items-center h-screen">
+    //             <BeatLoader size={80} color="#32BB78" />
+    //         </div>
+    // }
 
     if (error || !data) {
         return (

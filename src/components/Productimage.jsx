@@ -9,6 +9,7 @@ import { X } from "lucide-react"
 import EditAd from "./EditAd"
 import DeleteAd from "./DeleteAd"
 
+
 export default function Productimage({ isVisible, product,onClose }) {
 
 
@@ -33,6 +34,7 @@ export default function Productimage({ isVisible, product,onClose }) {
                     
                         <div className="  w-full space-y-2 mt-6">
                           <EditAd product={product}  />
+
                         <DeleteAd id={product?.id}  />  
                         </div>
 
