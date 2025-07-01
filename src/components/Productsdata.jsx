@@ -6,6 +6,7 @@ import { apiFetcher } from "@/api/client"
 import drakula from "../assets/drakula.jpg"
 import * as React from "react"
 import ProductFilters from "./custom/ProductFilters"
+import oops from "@/assets/Oops!.gif"
 
 import {
   flexRender,
@@ -40,11 +41,24 @@ import { Link } from "react-router"
 
 export const columns = [
   {
-    accessorKey: "images",
-    cell: ({ row }) => (
-      <img src={drakula} alt="" className="h-[40px] w-[40px] rounded-full" />
-    ),
+  accessorKey: "images",
+  header: "",
+  cell: ({ row }) => {
+    const images = row.getValue("images");
+    // Get the first image url if available and not empty
+    const imageUrl =
+      Array.isArray(images) && images[0]?.url
+        ? images[0].url
+        : drakula;
+    return (
+      <img
+        src={imageUrl}
+        alt=""
+        className="h-[40px] w-[40px] rounded-full object-cover "
+      />
+    );
   },
+},
   {
     accessorKey: "productTitle",
     header: "Ad Title",
@@ -193,23 +207,24 @@ export function DataTableDemo({ setProduct }) {
 
   if (isLoading) {
     return (
-      <div>
-        <BeatLoader size={100} />
-      </div>
+       <div className="flex justify-center items-center h-screen">
+                <BeatLoader size={80} color="#32BB78" />
+            </div>
     )
   }
 
   if (error) {
     return (
-      <div>
-        <p>Something went wrong</p>
+      <div className=" justify-center items-center flex flex-col">
+        <p className="text-green-buuton text-3xl font-bold font-inter">OOPS, IT'S US, NOT YOU</p>
+        <img src = {oops}/>
       </div>
     )
   }
 
   return (
-    <div className="w-full px-5 bg-white border border-light-border rounded-2xl">
-      <div className="flex items-center py-4">
+    <div className="w-full overflow-hidden space-y-6 px-5 bg-white border border-light-border rounded-2xl">
+      <div className="flex justify-between">
         <ProductFilters
           products={apiData}
           onSearch={handleSearch}
@@ -293,10 +308,13 @@ export function DataTableDemo({ setProduct }) {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {searchQuery || selectedFilter ?
-                    `No results found for current filters.` :
-                    'No results.'
-                  }
+              {(searchQuery || selectedFilter) ?
+                `No results found for current filters.` :
+                (<div className="flex flex-col items-center justify-center gap-2">
+                  <span className="text-2xl text-darkest-heading">You have not uploaded any ads yet. Upload Ad</span>
+                 
+                </div>)
+              }
                 </TableCell>
               </TableRow>
             )}

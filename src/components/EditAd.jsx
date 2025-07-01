@@ -6,6 +6,14 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { SquarePen, CheckCircle } from "lucide-react"
 
 export default function EditAd({ product }) {
+   const [toast, setToast] = useState({ show: false, message: '', type: '' })
+
+    const showToast = (message, type) => {
+        setToast({ show: true, message, type })
+        setTimeout(() => {
+            setToast({ show: false, message: '', type: '' })
+        }, 3000)
+    }
 
 
   const [advert, setadvert] = useState({});
@@ -38,9 +46,15 @@ export default function EditAd({ product }) {
         }
       });
       console.log(response.data)
+      showToast('Ad Updated successfully!', 'success')
+            
+           
+            setTimeout(() => {
+                window.location.reload()
+            }, 1500)
 
-      setShowSuccess(true);
-      setErrorMessage('');
+      // setShowSuccess(true);
+      // setErrorMessage('');
 
 
     } catch (error) {
@@ -51,11 +65,12 @@ export default function EditAd({ product }) {
   }
 
   return (
+    <>
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className='font-lato md:h-8 md:w-70 mt-5 bg-white border border-green-buuton rounded-full group-hover:bg-yellow-button group-hover:text-black transition-colors text-primary-color cursor-pointer"'>
-          <span className="hidden sm:inline">Edit Ad</span>
-          <span className="sm:hidden">Edit</span>
+        <button className='font-lato bg-darkest-heading hover:bg-primary-color hover:text-darkest-heading text-white w-[300px] py-2 border-darkest-heading  border  rounded-full group-hover:bg-yellow-button group-hover:text-black transition-colors  cursor-pointer'>
+          Edit Ad
+          {/* <span className="sm:hidden">Edit</span> */}
         </button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] fixed bg-white p-3 sm:p-4 md:p-6 rounded-md shadow-md w-[95vw] sm:w-[90vw] md:w-full max-w-2xl mx-auto">
@@ -75,7 +90,7 @@ export default function EditAd({ product }) {
           className="bg-white max-w-lg mx-auto p-6 rounded-lg shadow-lg space-y-5 font-roboto"
         >
           <h2 className="text-xl font-semibold text-green-700">Edit ad</h2>
-          <p className="text-sm text-gray-500">Provide the fields below to upload an ad</p>
+          {/* <p className="text-sm text-gray-500">Provide the fields below to upload an ad</p> */}
 
           <div className="space-y-1">
             <label className="text-sm font-medium text-gray-700">
@@ -194,5 +209,26 @@ export default function EditAd({ product }) {
         </form>
       </DialogContent>
     </Dialog>
+    {toast.show && (
+                <div className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out ${
+                    toast.type === 'success' 
+                        ? 'bg-green-500 text-white' 
+                        : 'bg-red-500 text-white'
+                }`}>
+                    <div className="flex items-center space-x-2">
+                        {toast.type === 'success' ? (
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                        ) : (
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                        )}
+                        <span className="font-medium">{toast.message}</span>
+                    </div>
+                </div>
+            )}
+            </>
   )
 }

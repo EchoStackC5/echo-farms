@@ -4,6 +4,7 @@ import Productimage from "@/components/Productimage"
 import { useState } from "react"
 import ProductFilters from "@/components/custom/ProductFilters"
 
+
 export default function ManageAds() {
     const [product, setProduct] = useState(null);
 
@@ -18,7 +19,7 @@ export default function ManageAds() {
                     <DataTableDemo setProduct={setProduct} />
                 </div>
                 {product && <div className="">
-                    <Productimage isVisible={!!product} product={product} />
+                    <Productimage isVisible={!!product} product={product} onClose={() => setProduct(null)}  />
                 </div>}
 
 

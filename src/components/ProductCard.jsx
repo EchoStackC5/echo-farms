@@ -1,5 +1,6 @@
 // src/components/ProductCard.jsx
 import { MapPin, Star, StarHalf } from "lucide-react";
+import trackVideo from "@/assets/videos/trackVideo.mp4";
 
 // Add onClick to the props
 export default function ProductCard({
@@ -33,9 +34,31 @@ export default function ProductCard({
   }
 
   // Determine the primary image URL
-  const imageUrlToDisplay = images && images.length > 0 && images[0].url
-    ? images[0].url // Use the URL from the first image object in the array
-    : 'https://placehold.co/397x555/F0F0F0/000000?text=No+Image'; // Fallback
+   let mediaElement;
+  if (images && images.length > 0 && images[0].url) {
+    // Show image if available
+    mediaElement = (
+      <img
+        src={images[0].url}
+        alt={productTitle}
+        className="w-[600px] md:h-[400px] h-[240px] object-cover rounded-t-lg"
+      />
+    );
+  } else {
+    // Show fallback video if no image
+    mediaElement = (
+      <video
+        src={trackVideo}
+        className="w-[600px] md:h-[400px] h-[240px] object-cover rounded-t-lg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        controls={false}
+        aria-label="Product preview video"
+      />
+    );
+  }
 
   // Determine the category to display (assuming you want the first one if it's an array)
   const categoryToDisplay = Array.isArray(category) && category.length > 0
@@ -51,17 +74,18 @@ export default function ProductCard({
   return (
     // Add onClick handler to the main div and make it a button-like element for accessibility
     <button
-      className="max-w-[280px] sm:max-w-[320px] bg-backgrounds border border-light-border shadow-lg rounded-lg overflow-hidden mx-auto transition-transform hover:scale-103 hover:shadow-green-500 cursor-pointer block text-left p-0" // Added block, text-left, p-0, and cursor-pointer
+      className="w-full bg-backgrounds border border-light-border shadow-md  rounded-lg overflow-hidden  transition-transform hover:scale-103 cursor-pointer block text-left p-0" // Added w-80 for fixed width
       onClick={onClick} // Attach the onClick prop here
       aria-label={`View details for ${productTitle}`}
     >
       {/* Image */}
       <div className="relative">
-        <img
-          src={imageUrlToDisplay} // Use the derived image URL
+         {mediaElement}
+        {/* <img
+          src={mediaElement} // Use the derived image URL
           alt={productTitle} // Use productTitle for alt text
-          className="w-full md:h-[400px] h-[240px] object-cover rounded-t-lg" // Added rounded-t-lg for consistency
-        />
+          className="w-[600px] md:h-[200px] h-[240px] object-cover rounded-t-lg" // Added rounded-t-lg for consistency
+        /> */}
       </div>
 
       {/* Info Section */}
